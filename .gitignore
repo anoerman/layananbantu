@@ -35,5 +35,5 @@ assets/templates/adminlte-2-3-11/documentation/*
 assets/templates/adminlte-2-3-11/pages/*
 
 # Upload files
-assets/uploads/images/konfirmasi/*
-assets/uploads/images/profile/*
+# assets/uploads/images/konfirmasi/*
+# assets/uploads/images/profile/*
