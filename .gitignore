@@ -30,10 +30,16 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/tests/
 /tests/results/
 
+# Database
+# ===========
+application/config/database.php
+
 # Template
+# ============
 assets/templates/adminlte-2-3-11/documentation/*
 assets/templates/adminlte-2-3-11/pages/*
 
 # Upload files
+# ============
 assets/uploads/images/konfirmasi/*
 assets/uploads/images/profile/*
