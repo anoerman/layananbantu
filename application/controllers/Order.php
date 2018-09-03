@@ -279,7 +279,7 @@ class Order extends CI_Controller {
 	*	@return 	void
 	*
 	*/
-	public function data_list($cabang="2")
+	public function data_list($cabang="0")
 	{
 		// Jika tidak login, kembalikan ke halaman utama
 		if (!$this->ion_auth->logged_in())

@@ -38,6 +38,7 @@
 										<div class="input-group">
 										  <span class="input-group-addon">Cabang</span>
 										  <select class="form-control" name="cbg" id="data_list_cabang">
+												<option value="0" <?php echo ($curr_cabang == '0') ? "selected" : ""; ?>>Semua cabang</option>
 									  	<?php foreach ($cabang_list->result() as $cl): ?>
 									  		<option value="<?php echo $cl->id ?>" <?php echo ($curr_cabang == $cl->id) ? "selected" : ""; ?>><?php echo $cl->nama ?></option>
 									  	<?php endforeach; ?>

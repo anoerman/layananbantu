@@ -109,15 +109,21 @@ class Order_model extends CI_Model
 		if ($status!="") {
 			$this->db->where('status', $status);
 		}
+		if ($cabang!="0") {
+			$this->db->where('cabang', $cabang);
+		}
 		$this->db->select(
 			$this->main_table.".*, ".
 			$this->user_table.".*, ".
-			$this->status_table.".nama AS nama_status "
+			$this->status_table.".nama AS nama_status, ".
+			$this->cabang_table.".nama AS nama_cabang, ".
+			$this->regional_table.".nama AS nama_regional "
 		);
 		$this->db->join($this->user_table, $this->main_table.".toko = ".$this->user_table.".username", "left");
 		$this->db->join($this->status_table, $this->main_table.".status = ".$this->status_table.".id", "left");
+		$this->db->join($this->cabang_table, $this->main_table.".cabang = ".$this->cabang_table.".id", "left");
+		$this->db->join($this->regional_table, $this->main_table.".regional = ".$this->regional_table.".id", "left");
 		$this->db->where('hapus', 0);
-		$this->db->where('cabang', $cabang);
 		$this->db->order_by($this->main_table.".id", "desc");
 		$datas = $this->db->get($this->main_table);
 		return $datas;

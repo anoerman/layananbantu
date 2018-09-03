@@ -49,6 +49,10 @@
 									<span class="glyphicon glyphicon-home"></span> &nbsp; <?php echo $data_1->first_name; echo ($data_1->last_name!="") ? " ".$data_1->last_name : ""; ?>
 								</div>
 
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_1->nama_regional ?>, <?php echo $data_1->nama_cabang ?>
+								</div>
+
 								<?php if ($data_1->motor!=""): ?>
 								<div class="col-md-12 col-sm-12">
 									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_1->motor; ?>
@@ -131,6 +135,10 @@
 									<span class="glyphicon glyphicon-home"></span> &nbsp; <?php echo $data_2->first_name; echo ($data_2->last_name!="") ? " ".$data_2->last_name : ""; ?>
 								</div>
 
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_2->nama_regional ?>, <?php echo $data_2->nama_cabang ?>
+								</div>
+
 								<?php if ($data_2->motor!=""): ?>
 								<div class="col-md-12 col-sm-12">
 									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_2->motor; ?>
@@ -208,6 +216,10 @@
 
 								<div class="col-md-12 col-sm-12">
 									<span class="glyphicon glyphicon-home"></span> &nbsp; <?php echo $data_3->first_name; echo ($data_3->last_name!="") ? " ".$data_3->last_name : ""; ?>
+								</div>
+
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_3->nama_regional ?>, <?php echo $data_3->nama_cabang ?>
 								</div>
 
 								<?php if ($data_3->motor!=""): ?>
@@ -289,6 +301,10 @@
 									<span class="glyphicon glyphicon-home"></span> &nbsp; <?php echo $data_4->first_name; echo ($data_4->last_name!="") ? " ".$data_4->last_name : ""; ?>
 								</div>
 
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_4->nama_regional ?>, <?php echo $data_4->nama_cabang ?>
+								</div>
+
 								<?php if ($data_4->motor!=""): ?>
 								<div class="col-md-12 col-sm-12">
 									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_4->motor; ?>
@@ -366,6 +382,10 @@
 
 								<div class="col-md-12 col-sm-12">
 									<span class="glyphicon glyphicon-home"></span> &nbsp; <?php echo $data_5->first_name; echo ($data_5->last_name!="") ? " ".$data_5->last_name : ""; ?>
+								</div>
+
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_5->nama_regional ?>, <?php echo $data_5->nama_cabang ?>
 								</div>
 
 								<?php if ($data_5->motor!=""): ?>
