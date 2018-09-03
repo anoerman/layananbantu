@@ -115,11 +115,14 @@ class Order_model extends CI_Model
 		$this->db->select(
 			$this->main_table.".*, ".
 			$this->user_table.".*, ".
+			"user2.first_name AS cs_fn, ".
+			"user2.last_name AS cs_ln, ".
 			$this->status_table.".nama AS nama_status, ".
 			$this->cabang_table.".nama AS nama_cabang, ".
 			$this->regional_table.".nama AS nama_regional "
 		);
 		$this->db->join($this->user_table, $this->main_table.".toko = ".$this->user_table.".username", "left");
+		$this->db->join($this->user_table ." AS user2", $this->main_table.".created_by = user2.username", "left");
 		$this->db->join($this->status_table, $this->main_table.".status = ".$this->status_table.".id", "left");
 		$this->db->join($this->cabang_table, $this->main_table.".cabang = ".$this->cabang_table.".id", "left");
 		$this->db->join($this->regional_table, $this->main_table.".regional = ".$this->regional_table.".id", "left");
@@ -152,12 +155,15 @@ class Order_model extends CI_Model
 		$this->db->select(
 			$this->main_table.".*, ".
 			$this->user_table.".*, ".
+			"user2.first_name AS cs_fn, ".
+			"user2.last_name AS cs_ln, ".
 			$this->status_table.".nama AS nama_status, ".
 			$this->cabang_table.".nama AS nama_cabang, ".
 			$this->regional_table.".nama AS nama_regional, ".
 			$this->jenis_velg_table.".nama AS nama_jenis_velg "
 		);
 		$this->db->join($this->user_table, $this->main_table.".toko = ".$this->user_table.".username", "left");
+		$this->db->join($this->user_table ." AS user2", $this->main_table.".created_by = user2.username", "left");
 		$this->db->join($this->status_table, $this->main_table.".status = ".$this->status_table.".id", "left");
 		$this->db->join($this->cabang_table, $this->main_table.".cabang = ".$this->cabang_table.".id", "left");
 		$this->db->join($this->regional_table, $this->main_table.".regional = ".$this->regional_table.".id", "left");
@@ -202,6 +208,8 @@ class Order_model extends CI_Model
 			$this->user_table.".last_name, ".
 			$this->user_table.".phone, ".
 			$this->user_table.".cabang_id, ".
+			"user2.first_name AS cs_fn, ".
+			"user2.last_name AS cs_ln, ".
 			$this->status_table.".nama AS nama_status, ".
 			$this->jenis_velg_table.".nama AS nama_jenis_velg, ".
 			$this->cabang_table.".nama AS nama_cabang, ".
@@ -209,6 +217,7 @@ class Order_model extends CI_Model
 		);
 		$this->db->where('hapus', 0);
 		$this->db->join($this->user_table, $this->main_table.".toko = ".$this->user_table.".username", "left");
+		$this->db->join($this->user_table ." AS user2", $this->main_table.".created_by = user2.username", "left");
 		$this->db->join($this->status_table, $this->main_table.".status = ".$this->status_table.".id", "left");
 		$this->db->join($this->jenis_velg_table, $this->main_table.".jenis_velg = ".$this->jenis_velg_table.".id", "left");
 		$this->db->join($this->cabang_table, $this->main_table.".cabang = ".$this->cabang_table.".id", "left");

@@ -53,6 +53,10 @@
 									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_1->nama_regional ?>, <?php echo $data_1->nama_cabang ?>
 								</div>
 
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_1->cs_fn; echo ($data_1->cs_ln!="") ? " ".$data_1->cs_ln : ""; ?>
+								</div>
+
 								<?php if ($data_1->motor!=""): ?>
 								<div class="col-md-12 col-sm-12">
 									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_1->motor; ?>
@@ -139,6 +143,10 @@
 									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_2->nama_regional ?>, <?php echo $data_2->nama_cabang ?>
 								</div>
 
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_2->cs_fn; echo ($data_2->cs_ln!="") ? " ".$data_2->cs_ln : ""; ?>
+								</div>
+
 								<?php if ($data_2->motor!=""): ?>
 								<div class="col-md-12 col-sm-12">
 									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_2->motor; ?>
@@ -220,6 +228,10 @@
 
 								<div class="col-md-12 col-sm-12">
 									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_3->nama_regional ?>, <?php echo $data_3->nama_cabang ?>
+								</div>
+
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_3->cs_fn; echo ($data_3->cs_ln!="") ? " ".$data_3->cs_ln : ""; ?>
 								</div>
 
 								<?php if ($data_3->motor!=""): ?>
@@ -305,6 +317,10 @@
 									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_4->nama_regional ?>, <?php echo $data_4->nama_cabang ?>
 								</div>
 
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_4->cs_fn; echo ($data_4->cs_ln!="") ? " ".$data_4->cs_ln : ""; ?>
+								</div>
+
 								<?php if ($data_4->motor!=""): ?>
 								<div class="col-md-12 col-sm-12">
 									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_4->motor; ?>
@@ -386,6 +402,10 @@
 
 								<div class="col-md-12 col-sm-12">
 									<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_5->nama_regional ?>, <?php echo $data_5->nama_cabang ?>
+								</div>
+
+								<div class="col-md-12 col-sm-12">
+									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_5->cs_fn; echo ($data_5->cs_ln!="") ? " ".$data_5->cs_ln : ""; ?>
 								</div>
 
 								<?php if ($data_5->motor!=""): ?>

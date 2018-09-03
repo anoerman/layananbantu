@@ -19,6 +19,8 @@
 			<?php // Show message and ini val data
 			echo $message;
 			foreach ($data_header->result() as $data) {
+				$nama_cs       = ($data->cs_ln != "") ?
+													$data->cs_fn." ".$data->cs_ln : $data->cs_fn;
 				$toko          = ($data->last_name != "") ?
 													$data->first_name." ".$data->last_name : $data->first_name;
 				$tanggal       = $data->tanggal;
@@ -31,6 +33,8 @@
 				$nomor_polisi  = ($data->nomor_polisi != "") ? $data->nomor_polisi : "-";
 				$foto          = $data->foto;
 				$jenis_velg    = $data->nama_jenis_velg;
+				$nama_cabang   = $data->nama_cabang;
+				$nama_regional = $data->nama_regional;
 				$sumber_info   = ($data->sumber_info != "") ? $data->sumber_info : "-";
 				$petugas       = ($data->petugas != "") ? $data->petugas : "-";
 				$keterangan    = ($data->keterangan != "") ? $data->keterangan : "-";
@@ -81,6 +85,18 @@
 										<label for="sumber_info" class="control-label col-sm-3"><i class="fa fa-question"></i> &nbsp; Sumber Info</label>
 										<div class="col-sm-9 col-md-8">
 											<p class="form-control-static well well-sm"><?php echo $sumber_info ?></p>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="nama_cs" class="control-label col-sm-3"><i class="glyphicon glyphicon-headphones"></i> &nbsp; Customer Service</label>
+										<div class="col-sm-9 col-md-8">
+											<p class="form-control-static well well-sm"><?php echo $nama_cs ?></p>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="nama_cabang" class="control-label col-sm-3"><i class="glyphicon glyphicon-globe"></i> &nbsp; Cabang & Regional</label>
+										<div class="col-sm-9 col-md-8">
+											<p class="form-control-static well well-sm"><?php echo $nama_cabang ?>, <?php echo $nama_regional ?></p>
 										</div>
 									</div>
 									<!-- <hr> -->

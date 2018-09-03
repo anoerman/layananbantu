@@ -1157,7 +1157,7 @@ class Order extends CI_Controller {
 	*	@return 	void
 	*
 	*/
-	public function detail($kode, $tanggal_awal="", $tanggal_akhir="")
+	public function detail($kode)
 	{
 		// Jika tidak login, kembalikan ke halaman utama
 		if (!$this->ion_auth->logged_in())
@@ -1174,8 +1174,6 @@ class Order extends CI_Controller {
 			$this->data['kode']          = $kode;
 			$this->data['data_header']   = $this->order_model->get_order_by_kode($kode);
 			$this->data['data_detail']   = $this->order_model->get_order_detail_by_kode($kode);
-			$this->data['tanggal_awal']  = $tanggal_awal;
-			$this->data['tanggal_akhir'] = $tanggal_akhir;
 
 			// set the flash data error message if there is one
 			$this->data['message']       = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');

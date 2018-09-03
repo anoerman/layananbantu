@@ -194,11 +194,15 @@
 														</div>
 
 														<div class="col-md-12 col-sm-12">
-															<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_1->nama_regional; ?>
+															<span class="glyphicon glyphicon-home"></span> &nbsp; <?php echo $data_1->first_name; echo ($data_1->last_name!="") ? " ".$data_1->last_name : ""; ?>
+														</div>
+														
+														<div class="col-md-12 col-sm-12">
+															<span class="glyphicon glyphicon-globe"></span> &nbsp; <?php echo $data_1->nama_cabang ?>, <?php echo $data_1->nama_regional; ?>
 														</div>
 
 														<div class="col-md-12 col-sm-12">
-															<span class="glyphicon glyphicon-home"></span> &nbsp; <?php echo $data_1->first_name; echo ($data_1->last_name!="") ? " ".$data_1->last_name : ""; ?>
+															<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_1->cs_fn; echo ($data_1->cs_ln!="") ? " ".$data_1->cs_ln : ""; ?>
 														</div>
 
 														<div class="col-md-12 col-sm-12">
