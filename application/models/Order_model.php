@@ -141,16 +141,31 @@ class Order_model extends CI_Model
 	*
 	*	@param 		string 		$tanggal_awal
 	*	@param 		string 		$tanggal_akhir
-	*	@param 		string 		$limit
-	*	@param 		string 		$start
+	*	@param 		string 		$cabang
+	*	@param 		string 		$regional
+	*	@param 		string 		$status
 	*	@return 	array 		$datas
 	*
 	*/
-	public function get_order_history($tanggal_awal, $tanggal_akhir, $cabang, $regional)
+	public function get_order_history($tanggal_awal, $tanggal_akhir, $cabang, $regional, $status="")
 	{
 		// Format tanggal
 		$awal  = date('Y-m-d', strtotime($tanggal_awal)) . " 00:00:00";
 		$akhir = date('Y-m-d', strtotime($tanggal_akhir)) . " 23:59:59";
+
+		// Filter cabang dan regional
+		if ($cabang!="0" && $regional!="0") {
+			$this->db->where('cabang', $cabang);
+			$this->db->where_in('regional', $regional);
+		}
+
+		// Filter status
+		if ($status!="") {
+			$this->db->where('status', $status);
+		}
+		else {
+			$this->db->where('status >=', '6');
+		}
 
 		$this->db->select(
 			$this->main_table.".*, ".
@@ -169,11 +184,8 @@ class Order_model extends CI_Model
 		$this->db->join($this->regional_table, $this->main_table.".regional = ".$this->regional_table.".id", "left");
 		$this->db->join($this->jenis_velg_table, $this->main_table.".jenis_velg = ".$this->jenis_velg_table.".id", "left");
 		$this->db->where('hapus', 0);
-		$this->db->where('status >=', '6');
 		$this->db->where('tanggal >=', $awal);
 		$this->db->where('tanggal <=', $akhir);
-		$this->db->where('cabang', $cabang);
-		$this->db->where_in('regional', $regional);
 		$this->db->order_by($this->main_table.".id", "desc");
 
 		// // if limit and start provided

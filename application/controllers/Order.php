@@ -166,7 +166,7 @@ class Order extends CI_Controller {
 							// Fail to save the detail
 							$this->session->set_flashdata('message',
 								$this->config->item('error_start_delimiter', 'ion_auth')
-								."Detail Pesanan gagal disimpan!".
+								."Pesanan sudah berhasil disimpan, namun detail pesanan gagal disimpan atau data detail tidak valid!<br>Silahkan ubah data pesanan tersebut dan isikan detail pesanan.".
 								$this->config->item('error_end_delimiter', 'ion_auth')
 							);
 						}
@@ -428,7 +428,7 @@ class Order extends CI_Controller {
 	*	@return 	void
 	*
 	*/
-	public function history($start="", $finish="", $page="1")
+	public function history()
 	{
 		// Jika tidak login, kembalikan ke halaman utama
 		if (!$this->ion_auth->logged_in())
@@ -443,31 +443,9 @@ class Order extends CI_Controller {
 				$this->my_order();
 			}
 			else {
-				$this->data['tanggal_awal']       = $start;
-				$this->data['tanggal_akhir']      = $finish;
 				$this->data['daftar_cabang']      = $this->cabang_model->get_cabang("", "1");
 				$this->data['data_order_selesai'] = "";
-				if ($start!="" && $finish!="") {
-					$this->data['data_order_selesai'] = $this->order_model->get_order_history($start, $finish);
-
-					// Set pagination
-					$config['base_url']         = base_url('order/history/'.$start.'/'.$finish);
-					$config['use_page_numbers'] = TRUE;
-					$config['total_rows']       = count($this->data['data_order_selesai']->result());
-					$config['per_page']         = 10;
-					$this->pagination->initialize($config);
-
-					// Get datas and limit based on pagination settings
-					if ($page=="") { $page = 1; }
-					$this->data['data_order_selesai'] = $this->order_model->get_order_history(
-						$start,
-						$finish,
-						$config['per_page'],
-						( $page - 1 ) * $config['per_page']
-					);
-					$this->data['last_query'] = $this->db->last_query();
-					$this->data['pagination'] = $this->pagination->create_links();
-				}
+				$this->data['data_order_selesai'] = "";
 
 				// set the flash data error message if there is one
 				$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
@@ -524,7 +502,16 @@ class Order extends CI_Controller {
 						$start,
 						$finish,
 						$cabang,
-						$regional_id
+						$regional_id,
+						'6'
+					);
+
+					$this->data['data_order_batal'] = $this->order_model->get_order_history(
+						$start,
+						$finish,
+						$cabang,
+						$regional_id,
+						'7'
 					);
 
 					$this->data['last_query'] = $this->db->last_query();
@@ -1171,12 +1158,12 @@ class Order extends CI_Controller {
 			if ($this->ion_auth->in_group('toko')) {
 				redirect('order/my_order', 'refresh');
 			}
-			$this->data['kode']          = $kode;
-			$this->data['data_header']   = $this->order_model->get_order_by_kode($kode);
-			$this->data['data_detail']   = $this->order_model->get_order_detail_by_kode($kode);
+			$this->data['kode']        = $kode;
+			$this->data['data_header'] = $this->order_model->get_order_by_kode($kode);
+			$this->data['data_detail'] = $this->order_model->get_order_detail_by_kode($kode);
 
 			// set the flash data error message if there is one
-			$this->data['message']       = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 			$this->load->view('partials/_alte_header', $this->data);
 			$this->load->view('partials/_alte_menu');

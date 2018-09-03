@@ -462,8 +462,17 @@ class Regional extends CI_Controller {
 				}
 			}
 			else {
-				$result = "<p class='form-control-static text-danger'>Tidak ada regional dalam cabang ini!</p>";
-				$result .= "<input type='hidden' name='regional_id[]' id='regional_id' value='' >";
+				if ($cabang==0) {
+					$result = '<div class="radio">
+						<label for="regional_id_all">
+							<input type="checkbox" name="regional_id[]" id="regional_id_all" class="regional_cb" value="0" '.set_checkbox("regional_id[]", 0).'> Semua Regional
+						</label>
+					</div>';
+				}
+				else {
+					$result = "<p class='form-control-static text-danger'>Tidak ada regional dalam cabang ini!</p>";
+					$result .= "<input type='hidden' name='regional_id[]' id='regional_id' value='' >";
+				}
 			}
 		}
 		else {
