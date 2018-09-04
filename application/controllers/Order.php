@@ -127,7 +127,8 @@ class Order extends CI_Controller {
 					$num         = 0;
 					for ($i=0; $i < count($this->input->post('produk')); $i++) {
 						// Hanya ambil array dengan data produk dan harga yang terisi data
-						if (!empty($this->input->post('produk')[$i]) && !empty($this->input->post('harga')[$i])) {
+						//  && !empty($this->input->post('harga')[$i])
+						if (!empty($this->input->post('produk')[$i])) {
 							$data_detail[$num] = array(
 								'lb_kode'    => $kode,
 								'produk'     => $this->input->post('produk')[$i],
@@ -138,9 +139,6 @@ class Order extends CI_Controller {
 							$num++;
 						}
 					}
-
-					// var_dump($data_detail);
-					// exit;
 
 					// check to see if we are inserting the data
 					if ($this->order_model->insert_data($data)) {
@@ -800,7 +798,8 @@ class Order extends CI_Controller {
 					$num         = 0;
 					for ($i=0; $i < count($this->input->post('produk')); $i++) {
 						// Hanya ambil array dengan data produk dan harga yang terisi data
-						if (!empty($this->input->post('produk')[$i]) && !empty($this->input->post('harga')[$i])) {
+						// && !empty($this->input->post('harga')[$i])
+						if (!empty($this->input->post('produk')[$i])) {
 							// Cek duplikat, jika data sudah ada set aktual = 1
 							$detail_exists = $this->order_model->set_aktual_data_detail(
 								$kode,

@@ -19,6 +19,8 @@
 			<?php // Show message and ini val data
 			echo $message;
 			foreach ($data_header->result() as $data) {
+				$nama_cs       = ($data->cs_ln != "") ?
+													$data->cs_fn." ".$data->cs_ln : $data->cs_fn;
 				$toko          = ($data->last_name != "") ?
 													$data->first_name." ".$data->last_name : $data->first_name;
 				$tanggal       = $data->tanggal;
@@ -27,7 +29,8 @@
 				$alamat_lokasi = $data->alamat_lokasi;
 				$status_id     = $data->status;
 				$status        = $data->nama_status;
-				$nomor_polisi  = $data->nomor_polisi;
+				$motor         = ($data->motor != "") ? $data->motor : "-";
+				$nomor_polisi  = ($data->nomor_polisi != "") ? $data->nomor_polisi : "-";
 				$foto          = $data->foto;
 				$jenis_velg    = $data->nama_jenis_velg;
 				$sumber_info   = ($data->sumber_info != "") ? $data->sumber_info : "-";
@@ -89,8 +92,20 @@
 											<p class="form-control-static well well-sm"><?php echo $sumber_info ?></p>
 										</div>
 									</div>
+									<div class="form-group">
+										<label for="nama_cs" class="control-label col-sm-3"><i class="glyphicon glyphicon-headphones"></i> &nbsp; Customer Service</label>
+										<div class="col-sm-9 col-md-8">
+											<p class="form-control-static well well-sm"><?php echo $nama_cs ?></p>
+										</div>
+									</div>
 									<!-- <hr> -->
 									<legend>Info Kendaraan</legend>
+									<div class="form-group">
+										<label for="motor" class="control-label col-sm-3"><i class="fa fa-motorcycle"></i> &nbsp; Nama Motor</label>
+										<div class="col-sm-9 col-md-8">
+											<p class="form-control-static well well-sm"><?php echo $motor ?></p>
+										</div>
+									</div>
 									<div class="form-group">
 										<label for="nomor_polisi" class="control-label col-sm-3"><i class="fa fa-barcode"></i> &nbsp; Nomor Polisi</label>
 										<div class="col-sm-9 col-md-8">
