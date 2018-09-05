@@ -57,11 +57,6 @@
 									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_1->cs_fn; echo ($data_1->cs_ln!="") ? " ".$data_1->cs_ln : ""; ?>
 								</div>
 
-								<?php if ($data_1->motor!=""): ?>
-								<div class="col-md-12 col-sm-12">
-									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_1->motor; ?>
-								</div>
-								<?php endif; ?>
 							</div>
 						</div>
 						<div class="col-md-8 col-sm-12">
@@ -69,6 +64,12 @@
 								<div class="col-md-12 col-sm-12">
 									<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_1->nama_konsumen; ?>
 								</div>
+
+								<?php if ($data_1->motor!=""): ?>
+								<div class="col-md-12 col-sm-12">
+									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_1->motor; ?>
+								</div>
+								<?php endif; ?>
 
 								<?php if ($data_1->nomor_polisi!=""): ?>
 								<div class="col-md-12 col-sm-12">
@@ -147,11 +148,6 @@
 									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_2->cs_fn; echo ($data_2->cs_ln!="") ? " ".$data_2->cs_ln : ""; ?>
 								</div>
 
-								<?php if ($data_2->motor!=""): ?>
-								<div class="col-md-12 col-sm-12">
-									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_2->motor; ?>
-								</div>
-								<?php endif; ?>
 							</div>
 						</div>
 						<div class="col-md-8 col-sm-12">
@@ -159,6 +155,12 @@
 								<div class="col-md-12 col-sm-12">
 									<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_2->nama_konsumen; ?>
 								</div>
+
+								<?php if ($data_2->motor!=""): ?>
+								<div class="col-md-12 col-sm-12">
+									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_2->motor; ?>
+								</div>
+								<?php endif; ?>
 
 								<?php if ($data_2->nomor_polisi!=""): ?>
 								<div class="col-md-12 col-sm-12">
@@ -234,11 +236,6 @@
 									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_3->cs_fn; echo ($data_3->cs_ln!="") ? " ".$data_3->cs_ln : ""; ?>
 								</div>
 
-								<?php if ($data_3->motor!=""): ?>
-								<div class="col-md-12 col-sm-12">
-									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_3->motor; ?>
-								</div>
-								<?php endif; ?>
 							</div>
 						</div>
 						<div class="col-md-8 col-sm-12">
@@ -246,6 +243,12 @@
 								<div class="col-md-12 col-sm-12">
 									<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_3->nama_konsumen; ?>
 								</div>
+
+								<?php if ($data_3->motor!=""): ?>
+								<div class="col-md-12 col-sm-12">
+									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_3->motor; ?>
+								</div>
+								<?php endif; ?>
 
 								<?php if ($data_3->nomor_polisi!=""): ?>
 								<div class="col-md-12 col-sm-12">
@@ -321,11 +324,6 @@
 									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_4->cs_fn; echo ($data_4->cs_ln!="") ? " ".$data_4->cs_ln : ""; ?>
 								</div>
 
-								<?php if ($data_4->motor!=""): ?>
-								<div class="col-md-12 col-sm-12">
-									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_4->motor; ?>
-								</div>
-								<?php endif; ?>
 							</div>
 						</div>
 						<div class="col-md-8 col-sm-12">
@@ -333,6 +331,12 @@
 								<div class="col-md-12 col-sm-12">
 									<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_4->nama_konsumen; ?>
 								</div>
+
+								<?php if ($data_4->motor!=""): ?>
+								<div class="col-md-12 col-sm-12">
+									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_4->motor; ?>
+								</div>
+								<?php endif; ?>
 
 								<?php if ($data_4->nomor_polisi!=""): ?>
 								<div class="col-md-12 col-sm-12">
@@ -408,11 +412,6 @@
 									<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_5->cs_fn; echo ($data_5->cs_ln!="") ? " ".$data_5->cs_ln : ""; ?>
 								</div>
 
-								<?php if ($data_5->motor!=""): ?>
-								<div class="col-md-12 col-sm-12">
-									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_5->motor; ?>
-								</div>
-								<?php endif; ?>
 							</div>
 						</div>
 						<div class="col-md-8 col-sm-12">
@@ -420,6 +419,12 @@
 								<div class="col-md-12 col-sm-12">
 									<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_5->nama_konsumen; ?>
 								</div>
+
+								<?php if ($data_5->motor!=""): ?>
+								<div class="col-md-12 col-sm-12">
+									<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_5->motor; ?>
+								</div>
+								<?php endif; ?>
 
 								<?php if ($data_5->nomor_polisi!=""): ?>
 								<div class="col-md-12 col-sm-12">

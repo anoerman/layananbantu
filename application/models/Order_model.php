@@ -372,6 +372,57 @@ class Order_model extends CI_Model
 	}
 	// End of get_order_detail_aktual_by_kode
 
+	/**
+	*	Get order status by kode
+	*	from layanan_bantu_status table
+	*	sort by kode
+	*
+	*	@param 		string 		$kode
+	*	@return 	array 		$datas
+	*
+	*/
+	public function get_order_status_by_kode($kode)
+	{
+		$this->db->where('lb_kode', $kode);
+		$datas = $this->db->get($this->main_status_table);
+		return $datas;
+	}
+	// End of get_order_status_by_kode
+
+	/**
+	*	Get order ubah by kode
+	*	from layanan_bantu_ubah table
+	*	sort by kode
+	*
+	*	@param 		string 		$kode
+	*	@return 	array 		$datas
+	*
+	*/
+	public function get_order_ubah_by_kode($kode)
+	{
+		$this->db->where('lb_kode', $kode);
+		$datas = $this->db->get($this->main_ubah_table);
+		return $datas;
+	}
+	// End of get_order_ubah_by_kode
+
+	/**
+	*	Get order batal by kode
+	*	from layanan_bantu_batal table
+	*	sort by kode
+	*
+	*	@param 		string 		$kode
+	*	@return 	array 		$datas
+	*
+	*/
+	public function get_order_batal_by_kode($kode)
+	{
+		$this->db->where('lb_kode', $kode);
+		$datas = $this->db->get($this->main_batal_table);
+		return $datas;
+	}
+	// End of get_order_batal_by_kode
+
 
 	/**
 	*	Insert Data

@@ -560,13 +560,23 @@ class Order extends CI_Controller {
 				$this->data['tanggal_akhir'] = $finish;
 				$this->data['cabang']        = $cabang;
 				$this->data['regional_id']   = $regional_id;
+				$this->data['order_model']   = $this->order_model;
 
 				if ($start!="" && $finish!="") {
 					$this->data['data_order_selesai'] = $this->order_model->get_order_history(
 						$start,
 						$finish,
 						$cabang,
-						$regional_id
+						$regional_id,
+						'6'
+					);
+
+					$this->data['data_order_batal'] = $this->order_model->get_order_history(
+						$start,
+						$finish,
+						$cabang,
+						$regional_id,
+						'7'
 					);
 
 					$this->data['last_query'] = $this->db->last_query();

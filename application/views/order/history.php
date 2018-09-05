@@ -189,7 +189,7 @@
 						</div>
 						<div class="box-body">
 							<p>
-								Periode : <?php echo date('d F Y', strtotime($tanggal_awal)); ?> - <?php echo date('d F Y', strtotime($tanggal_akhir)); ?>
+								Data pesanan selesai selama periode : <?php echo date('d F Y', strtotime($tanggal_awal)); ?> - <?php echo date('d F Y', strtotime($tanggal_akhir)); ?>
 							</p>
 							<table class="table table-striped table-hover table-bordered">
 								<thead>
@@ -227,15 +227,16 @@
 												</div>
 												<div class="col-md-8 col-sm-12">
 													<div class="row">
+
+														<div class="col-md-12 col-sm-12">
+															<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_1->nama_konsumen; ?>
+														</div>
+
 														<?php if ($data_1->motor!=""): ?>
 															<div class="col-md-12 col-sm-12">
 																<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_1->motor; ?>
 															</div>
 														<?php endif; ?>
-
-														<div class="col-md-12 col-sm-12">
-															<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_1->nama_konsumen; ?>
-														</div>
 
 														<?php if ($data_1->nomor_polisi!=""): ?>
 														<div class="col-md-12 col-sm-12">
@@ -279,7 +280,7 @@
 			<?php if (isset($data_order_batal) && is_array($data_order_batal->result())): ?>
 				<?php //echo $last_query ?>
 				<?php if (count($data_order_batal->result()) > 0): ?>
-					<div class="box box-warning">
+					<div class="box box-danger">
 						<div class="box-header with-border">
 							<h3 class="box-title">
 								<span class="glyphicon glyphicon-check"></span> &nbsp; Order Batal
@@ -291,7 +292,7 @@
 						</div>
 						<div class="box-body">
 							<p>
-								Periode : <?php echo date('d F Y', strtotime($tanggal_awal)); ?> - <?php echo date('d F Y', strtotime($tanggal_akhir)); ?>
+								Data pesanan yang dibatalkan selama periode <?php echo date('d F Y', strtotime($tanggal_awal)); ?> - <?php echo date('d F Y', strtotime($tanggal_akhir)); ?>
 							</p>
 							<table class="table table-striped table-hover table-bordered">
 								<thead>
@@ -329,15 +330,15 @@
 												</div>
 												<div class="col-md-8 col-sm-12">
 													<div class="row">
+														<div class="col-md-12 col-sm-12">
+															<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_2->nama_konsumen; ?>
+														</div>
+
 														<?php if ($data_2->motor!=""): ?>
 															<div class="col-md-12 col-sm-12">
 																<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_2->motor; ?>
 															</div>
 														<?php endif; ?>
-
-														<div class="col-md-12 col-sm-12">
-															<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_2->nama_konsumen; ?>
-														</div>
 
 														<?php if ($data_2->nomor_polisi!=""): ?>
 														<div class="col-md-12 col-sm-12">
