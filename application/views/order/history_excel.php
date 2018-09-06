@@ -25,7 +25,7 @@ $objPHPExcel->getProperties()->setCreator("anoerman")
 $objPHPExcel->getActiveSheet()->setTitle('Layanan Bantu');
 
 // Header Title
-$objPHPExcel->getActiveSheet()->setCellValue("B2", "Laporan Riwayat Layanan Bantu Cabang".stripslashes($cabang));
+$objPHPExcel->getActiveSheet()->setCellValue("B2", "Laporan Riwayat Layanan Bantu Cabang ".stripslashes($nama_cabang));
 $objPHPExcel->getActiveSheet()->getStyle('B2')->getFont()->setSize(20);
 $objPHPExcel->getActiveSheet()->getStyle('B2')->getFont()->setBold(true);
 $objPHPExcel->getActiveSheet()->setCellValue("B3", "Data order layanan bantu selesai. Periode Tanggal : ". date_format(date_create($tanggal_awal), 'd F Y') ." sampai dengan ".date_format(date_create($tanggal_akhir), 'd F Y'));
@@ -104,7 +104,6 @@ $top_limit = 4;
 
 // Isi
 $no          = 0;
-$nama_cabang = "";
 
 // Zebra
 $zebra = "ya";
@@ -116,11 +115,6 @@ foreach ($data_order_selesai->result_array() as $dl) {
 	// Set batas atas dan bawah dari baris
 	$top_limit1 = $top_limit;
 	$top_limit2 = $top_limit;
-
-  // Set nama cabang
-  if ($nama_cabang=="") {
-    $nama_cabang = str_replace(' ', '_', $dl['nama_cabang']);
-  }
 
 	// Content
 	$objPHPExcel->setActiveSheetIndex(0)
@@ -457,7 +451,7 @@ $objPHPExcel->getActiveSheet()->getStyle('B'.$info_limit)->getAlignment()->setWr
 // Set Vertical Align to TOP!
 $objPHPExcel->getActiveSheet()->getStyle('B3:U'.$top_limit)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
 
-$objPHPExcel->getActiveSheet()->setCellValue("B2", "Riwayat layanan bantu cabang : ".str_replace("_", " ", $nama_cabang));
+$objPHPExcel->getActiveSheet()->setCellValue("B2", "Riwayat layanan bantu cabang : ".$nama_cabang);
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
@@ -466,7 +460,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 ob_clean();
 // Redirect output to a client’s web browser (Excel2007)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Laporan_Riwayat_LB_'.$nama_cabang. "_". date_format(date_create($tanggal_awal), 'd_F_Y') ."_sd_".date_format(date_create($tanggal_akhir), 'd_F_Y').'.xlsx"');
+header('Content-Disposition: attachment;filename="Laporan_Riwayat_LB_'.str_replace(" ", "_", $nama_cabang). "_". date_format(date_create($tanggal_awal), 'd_F_Y') ."_sd_".date_format(date_create($tanggal_akhir), 'd_F_Y').'.xlsx"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');

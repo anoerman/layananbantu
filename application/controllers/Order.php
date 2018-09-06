@@ -143,16 +143,17 @@ class Order extends CI_Controller {
 					// check to see if we are inserting the data
 					if ($this->order_model->insert_data($data)) {
 						$lb_id = $this->db->insert_id();
+
+						// Insert status
+						$data_status = array(
+							'lb_id'   => $lb_id,
+							'lb_kode' => $kode,
+							'status'  => $status,
+						);
+						$this->order_model->insert_data_status($data_status);
+						
 						// Insert detail data
 						if ($this->order_model->insert_data_detail($lb_id, $data_detail)) {
-							// Insert status
-							$data_status = array(
-								'lb_id'   => $lb_id,
-								'lb_kode' => $kode,
-								'status'  => $status,
-							);
-							$this->order_model->insert_data_status($data_status);
-
 							// Set message
 							$this->session->set_flashdata('message',
 								$this->config->item('message_start_delimiter', 'ion_auth')
@@ -561,6 +562,16 @@ class Order extends CI_Controller {
 				$this->data['cabang']        = $cabang;
 				$this->data['regional_id']   = $regional_id;
 				$this->data['order_model']   = $this->order_model;
+
+				// Nama cabang
+				if ($cabang == 0) {
+					$this->data['nama_cabang'] = "Semua Cabang";
+				}
+				else {
+					foreach ($this->cabang_model->get_cabang($cabang)->result() as $dcb) {
+						$this->data['nama_cabang'] = $dcb->nama;
+					}
+				}
 
 				if ($start!="" && $finish!="") {
 					$this->data['data_order_selesai'] = $this->order_model->get_order_history(
