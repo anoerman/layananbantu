@@ -308,7 +308,7 @@
 											<div class="well well-sm text-center">
 												<p><strong>Total Bayar Tunai</strong> </p>
 												<input type="hidden" name="total_bayar_hidden" id="total_bayar_hidden" value="">
-												<h1 id="total_bayar">0</h1>
+												<h1 id="total_bayar">Rp 0</h1>
 											</div>
 										</div>
 									</div>

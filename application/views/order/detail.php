@@ -38,6 +38,9 @@
 				$sumber_info   = ($data->sumber_info != "") ? $data->sumber_info : "-";
 				$petugas       = ($data->petugas != "") ? $data->petugas : "-";
 				$keterangan    = ($data->keterangan != "") ? $data->keterangan : "-";
+				$metode_bayar  = ($data->metode_bayar == 1) ? "Go Pay" : "Reguler";
+				$go_pay_bayar  = ($data->metode_bayar == 1) ? $data->go_pay_bayar : 0;
+				$total_bayar   = $data->total_bayar;
 			}
 			?>
 
@@ -150,58 +153,111 @@
 									<?php endif; ?>
 									<!-- <hr> -->
 									<legend>Detail Pesanan</legend>
-									<div class="table-responsive">
-										<table class="table table-hover table-striped table-bordered">
-											<thead>
-												<tr>
-													<th>
-														Produk & Harga
-													</th>
-													<!-- <th class="text-center">
-														<button type="button" class="btn btn-primary" name="addNewRow"><span class="glyphicon glyphicon-plus"></span></button>
-													</th> -->
-												</tr>
-											</thead>
-											<tbody>
-											<?php $idx = 0;
-											foreach ($data_detail->result() as $detail): $idx++; ?>
-												<tr>
+									<div class="panel panel-primary">
+									  <div class="panel-heading">
+									    <h3 class="panel-title">Produk dan Harga</h3>
+									  </div>
+
+										<div class="table-responsive">
+											<table class="table table-hover table-striped table-bordered">
+												<thead>
+													<tr>
+														<th>
+															<!-- Produk & Harga -->
+														</th>
+														<!-- <th class="text-center">
+															<button type="button" class="btn btn-primary" name="addNewRow"><span class="glyphicon glyphicon-plus"></span></button>
+														</th> -->
+													</tr>
+												</thead>
+												<tbody>
+													<?php $idx           = 0;
+													$total_bayar_organik = 0;
+													foreach ($data_detail->result() as $detail): $idx++;
+														$total_bayar_organik = $total_bayar_organik + $detail->harga;
+													?>
+													<tr>
+														<td>
+															<div class="col-md-6 col-sm-12">
+																<div class="input-group">
+																	<span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	<input type="text" name="produk[]" id="produk<?php echo $idx; ?>" class="form-control produk" value="<?php echo $detail->produk; ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )" readonly>
+																</div>
+															</div>
+															<div class="col-md-6 col-sm-12">
+																<div class="input-group">
+																	<span class="input-group-addon">Rp. </span>
+																	<input type="number" name="harga[]" id="harga<?php echo $idx; ?>" class="form-control" min="0" max="2500000" value="<?php echo number_format($detail->harga, '0', ',' , '.'); ?>" placeholder="Harga Produk" readonly>
+																</div>
+															</div>
+														</td>
+													</tr>
+												<?php endforeach; ?>
+												<?php /*for ($i=$idx; $i < 7; $i++) { ?>
+													<tr>
 													<td>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-																<span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-																<input type="text" name="produk[]" id="produk<?php echo $idx; ?>" class="form-control produk" value="<?php echo $detail->produk; ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )" readonly>
-															</div>
-														</div>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-																<span class="input-group-addon">Rp. </span>
-																<input type="number" name="harga[]" id="harga<?php echo $idx; ?>" class="form-control" min="0" max="2500000" value="<?php echo number_format($detail->harga, '0', ',' , '.'); ?>" placeholder="Harga Produk" readonly>
-															</div>
-														</div>
+													<div class="col-md-6 col-sm-12">
+													<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+													<input type="text" name="produk[]" id="produk<?php echo $i; ?>" class="form-control produk" value="<?php echo set_value('produk[$i]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+													</div>
+													</div>
+													<div class="col-md-6 col-sm-12">
+													<div class="input-group">
+													<span class="input-group-addon">Rp. </span>
+													<input type="number" name="harga[]" id="harga<?php echo $i; ?>" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[$i]'); ?>" placeholder="Harga Produk">
+													</div>
+													</div>
 													</td>
-												</tr>
-											<?php endforeach; ?>
-											<?php /*for ($i=$idx; $i < 7; $i++) { ?>
-												<tr>
-													<td>
-														<div class="col-md-6 col-sm-12">
+													</tr>
+													<?php }*/ ?>
+												</tbody>
+											</table>
+										</div>
+
+										<div class="panel-footer">
+											<!-- Info Total Bayar dan potongan Go Pay -->
+											<div class="row">
+												<div class="col-md-6 col-sm-12">
+												  <!-- <div class="form-group">
+														<label for="metode_bayar" class="control-label col-sm-6 col-md-4">Metode Bayar</label>
+														<div class="col-sm-7 col-md-8">
+															<p class="form-control-static"><?php echo $metode_bayar ?></p>
+														</div>
+												  </div> -->
+													<?php if ($go_pay_bayar!=0) : ?>
+												  <div class="form-group">
+														<style media="screen">
+														input,img{ display:inline-block;}
+														</style>
+														<div class="col-sm-12 text-center">
+															<h4>Metode Pembayaran : Go Pay.</h4>
+															<p>Silahkan tagihkan ke konsumen jumlah total bayar berikut.<br>Total bayar sudah dikurangi oleh jumlah nominal Go Pay dibawah ini.</p>
 															<div class="input-group">
-															  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-															  <input type="text" name="produk[]" id="produk<?php echo $i; ?>" class="form-control produk" value="<?php echo set_value('produk[$i]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																<span class="input-group-addon">
+																	<img src="<?php echo base_url("assets/images/go-pay.png") ?>" alt="Go Pay" class="img" height="20px">
+																</span>
+																<input type="number" name="nominal_go_pay" class="form-control" value="<?php echo number_format($go_pay_bayar, '0', ',' , '.') ?>" min="0" readonly>
 															</div>
 														</div>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon">Rp. </span>
-																<input type="number" name="harga[]" id="harga<?php echo $i; ?>" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[$i]'); ?>" placeholder="Harga Produk">
-															</div>
+												  </div>
+												<?php else: ?>
+													<div class="form-group">
+														<div class="col-md-12 text-center">
+															<h4>Metode Pembayaran : Reguler.</h4>
+															<p>Silahkan tagihkan ke konsumen jumlah total bayar berikut.</p>
 														</div>
-													</td>
-												</tr>
-											<?php }*/ ?>
-											</tbody>
-										</table>
+													</div>
+												<?php endif; ?>
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="well well-sm text-center">
+														<p><strong>Total Bayar Tunai</strong> </p>
+														<h1 id="total_bayar">Rp <?php echo number_format(($total_bayar!="") ? $total_bayar : $total_bayar_organik, '0', ',' , '.'); ?></h1>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
