@@ -132,133 +132,185 @@
 									</div>
 									<!-- <hr> -->
 									<legend>Detail Pesanan</legend>
-									<div class="table-responsive">
-										<table class="table table-hover table-striped table-bordered">
-											<thead>
-												<tr>
-													<th>
-														Produk & Harga
-													</th>
-													<!-- <th class="text-center">
-														<button type="button" class="btn btn-primary" name="addNewRow"><span class="glyphicon glyphicon-plus"></span></button>
-													</th> -->
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-															  <input type="text" name="produk[]" id="produk1" class="form-control produk" value="<?php echo set_value('produk[0]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )" required>
-															</div>
-														</div>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon">Rp. </span>
-																<input type="number" name="harga[]" id="harga1" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[0]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000" required>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-															  <input type="text" name="produk[]" id="produk2" class="form-control produk" value="<?php echo set_value('produk[1]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
-															</div>
-														</div>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon">Rp. </span>
-																<input type="number" name="harga[]" id="harga2" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[1]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-															  <input type="text" name="produk[]" id="produk3" class="form-control produk" value="<?php echo set_value('produk[2]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
-															</div>
-														</div>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon">Rp. </span>
-																<input type="number" name="harga[]" id="harga3" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[2]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-															  <input type="text" name="produk[]" id="produk4" class="form-control produk" value="<?php echo set_value('produk[3]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
-															</div>
-														</div>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon">Rp. </span>
-																<input type="number" name="harga[]" id="harga4" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[3]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-															  <input type="text" name="produk[]" id="produk5" class="form-control produk" value="<?php echo set_value('produk[4]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
-															</div>
-														</div>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon">Rp </span>
-																<input type="number" name="harga[]" id="harga5" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[4]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-															  <input type="text" name="produk[]" id="produk6" class="form-control produk" value="<?php echo set_value('produk[5]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
-															</div>
-														</div>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon">Rp </span>
-																<input type="number" name="harga[]" id="harga6" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[5]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-															  <input type="text" name="produk[]" id="produk7" class="form-control produk" value="<?php echo set_value('produk[6]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
-															</div>
-														</div>
-														<div class="col-md-6 col-sm-12">
-															<div class="input-group">
-															  <span class="input-group-addon">Rp </span>
-																<input type="number" name="harga[]" id="harga7" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[6]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
-															</div>
-														</div>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+									<div class="panel panel-primary">
+									  <div class="panel-heading">
+									    <h3 class="panel-title">Produk dan Harga</h3>
+									  </div>
+									  <!-- <div class="panel-body"> -->
+											<div class="table-responsive">
+												<table class="table table-hover table-striped table-bordered">
+													<thead>
+														<tr>
+															<th>
+																<!-- Produk & Harga -->
+															</th>
+															<!--
+															<th class="text-center">
+																<button type="button" class="btn btn-primary" name="addNewRow"><span class="glyphicon glyphicon-plus"></span></button>
+															</th> -->
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	  <input type="text" name="produk[]" id="produk1" class="form-control produk" value="<?php echo set_value('produk[0]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )" required>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon">Rp. </span>
+																		<input type="number" name="harga[]" id="harga1" class="form-control hitung-total" min="0" max="2500000" value="<?php echo set_value('harga[0]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000" required>
+																	</div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	  <input type="text" name="produk[]" id="produk2" class="form-control produk" value="<?php echo set_value('produk[1]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon">Rp. </span>
+																		<input type="number" name="harga[]" id="harga2" class="form-control hitung-total" min="0" max="2500000" value="<?php echo set_value('harga[1]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
+																	</div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	  <input type="text" name="produk[]" id="produk3" class="form-control produk" value="<?php echo set_value('produk[2]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon">Rp. </span>
+																		<input type="number" name="harga[]" id="harga3" class="form-control hitung-total" min="0" max="2500000" value="<?php echo set_value('harga[2]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
+																	</div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	  <input type="text" name="produk[]" id="produk4" class="form-control produk" value="<?php echo set_value('produk[3]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon">Rp. </span>
+																		<input type="number" name="harga[]" id="harga4" class="form-control hitung-total" min="0" max="2500000" value="<?php echo set_value('harga[3]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
+																	</div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	  <input type="text" name="produk[]" id="produk5" class="form-control produk" value="<?php echo set_value('produk[4]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon">Rp </span>
+																		<input type="number" name="harga[]" id="harga5" class="form-control hitung-total" min="0" max="2500000" value="<?php echo set_value('harga[4]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
+																	</div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	  <input type="text" name="produk[]" id="produk6" class="form-control produk" value="<?php echo set_value('produk[5]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon">Rp </span>
+																		<input type="number" name="harga[]" id="harga6" class="form-control hitung-total" min="0" max="2500000" value="<?php echo set_value('harga[5]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
+																	</div>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	  <input type="text" name="produk[]" id="produk7" class="form-control produk" value="<?php echo set_value('produk[6]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon">Rp </span>
+																		<input type="number" name="harga[]" id="harga7" class="form-control hitung-total" min="0" max="2500000" value="<?php echo set_value('harga[6]'); ?>" placeholder="Harga Produk" onkeypress="return input_angka(event)" pattern="\d*" max="2000000">
+																	</div>
+																</div>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+									  <!-- </div> -->
+										<div class="panel-footer">
+											&nbsp;
+										</div>
+									</div>
+									<!-- <hr> -->
+									<legend>Pembayaran</legend>
+									<div class="row">
+										<div class="col-md-6 col-sm-12">
+										  <div class="form-group">
+												<label for="metode_bayar" class="control-label col-sm-6 col-md-4">* Metode Bayar</label>
+												<div class="col-sm-7 col-md-8">
+													<div class="radio">
+														<label>
+															<input type="radio" name="metode_bayar" value="0" <?php echo set_radio('metode_bayar', '0'); ?> class="radio_metode_bayar" required>
+															Reguler
+														</label>
+														<label>
+															<input type="radio" name="metode_bayar" value="1" <?php echo set_radio('metode_bayar', '1'); ?> class="radio_metode_bayar" required>
+															Go Pay
+														</label>
+													</div>
+												</div>
+										  </div>
+										  <div class="form-group" id="nominal_go_pay_div" style="display:none">
+												<style media="screen">
+												input,img{ display:inline-block;}
+												</style>
+												<div class="col-sm-12 col-md-12">
+													<div class="input-group">
+														<span class="input-group-addon">
+															<img src="<?php echo base_url("assets/images/go-pay.png") ?>" alt="Go Pay" class="img" height="20px">
+														</span>
+														<input type="number" name="nominal_go_pay" id="nominal_go_pay" class="form-control kurangi-total" value="0" min="0" onkeypress="return input_angka(event)">
+													</div>
+												</div>
+										  </div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="well well-sm text-center">
+												<p><strong>Total Bayar Tunai</strong> </p>
+												<input type="hidden" name="total_bayar_hidden" id="total_bayar_hidden" value="">
+												<h1 id="total_bayar">0</h1>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

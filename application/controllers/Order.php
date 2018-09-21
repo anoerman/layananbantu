@@ -140,18 +140,29 @@ class Order extends CI_Controller {
 						}
 					}
 
+					// Order bayar array
+					$data_bayar = array(
+						'metode_bayar' => $this->input->post('metode_bayar'),
+						'go_pay_bayar' => $this->input->post('nominal_go_pay'),
+						'total_bayar'  => $this->input->post('total_bayar_hidden'),
+					);
+
+					// Order status array
+					$data_status = array(
+						'lb_kode' => $kode,
+						'status'  => $status,
+					);
+
 					// check to see if we are inserting the data
 					if ($this->order_model->insert_data($data)) {
 						$lb_id = $this->db->insert_id();
 
-						// Insert status
-						$data_status = array(
-							'lb_id'   => $lb_id,
-							'lb_kode' => $kode,
-							'status'  => $status,
-						);
-						$this->order_model->insert_data_status($data_status);
-						
+						// Insert bayar data
+						$this->order_model->insert_data_bayar($lb_id, $data_bayar);
+
+						// Insert status data
+						$this->order_model->insert_data_status($lb_id, $data_status);
+
 						// Insert detail data
 						if ($this->order_model->insert_data_detail($lb_id, $data_detail)) {
 							// Set message

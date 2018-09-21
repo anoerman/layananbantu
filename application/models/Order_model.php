@@ -14,6 +14,7 @@ class Order_model extends CI_Model
 
 		$this->main_table        = 'layanan_bantu';
 		$this->detail_table      = 'layanan_bantu_detail';
+		$this->main_bayar_table  = 'layanan_bantu_bayar';
 		$this->main_status_table = 'layanan_bantu_status';
 		$this->main_batal_table  = 'layanan_bantu_batal';
 		$this->main_ubah_table   = 'layanan_bantu_ubah';
@@ -497,6 +498,32 @@ class Order_model extends CI_Model
 	// End of insert_data_detail
 
 	/**
+	*	Insert Bayar Data
+	*	From controller
+	*
+	*	@param 		string
+	*	@param 		array
+	*	@return 	bool
+	*
+	*/
+	public function insert_data_bayar($lb_id, $datas)
+	{
+		$datas['lb_id']      = $lb_id;
+		// user and datetime
+		$datas['created_by'] = $this->loggedinuser->username;
+		$this->db->set('created_on', 'NOW()', FALSE);
+		$datas['updated_by'] = $this->loggedinuser->username;
+		$this->db->set('updated_on', 'NOW()', FALSE);
+
+		// Insert to table
+		if ($this->db->insert($this->main_bayar_table, $datas)) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+	// End of insert_data_bayar
+
+	/**
 	*	Insert Status Data
 	*	From controller
 	*
@@ -505,8 +532,9 @@ class Order_model extends CI_Model
 	*	@return 	bool
 	*
 	*/
-	public function insert_data_status($datas)
+	public function insert_data_status($lb_id, $datas)
 	{
+		$datas['lb_id']      = $lb_id;
 		// user and datetime
 		$datas['created_by'] = $this->loggedinuser->username;
 		$this->db->set('created_on', 'NOW()', FALSE);
@@ -523,7 +551,6 @@ class Order_model extends CI_Model
 	*	Insert Batal Data
 	*	From controller
 	*
-	*	@param 		string
 	*	@param 		array
 	*	@return 	bool
 	*
@@ -546,7 +573,6 @@ class Order_model extends CI_Model
 	*	Insert Ubah Data
 	*	From controller
 	*
-	*	@param 		string
 	*	@param 		array
 	*	@return 	bool
 	*
@@ -613,6 +639,7 @@ class Order_model extends CI_Model
 	*	From controller
 	*
 	*	@param 		array
+	*	@param 		string
 	*	@return 	bool
 	*
 	*/

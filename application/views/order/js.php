@@ -151,6 +151,42 @@
 	}
 	// / Ajax untuk menampilkan toko per regional
 
+	function formatAngka(nStr)
+	{
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? ',' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + '.' + '$2');
+    }
+    return "Rp " + x1 + x2;
+	}
+
+	// Fungsi untuk menampilkan atau menyembunyikan input nominal bayar
+	function tampilkan_nominal_bayar(metode_bayar) {
+		if (metode_bayar==0) {
+			$("#nominal_go_pay_div").hide('hide');
+			// Kembalikan value jika bayar reguler
+			var nominal_baru = Number($("#total_bayar_hidden").val());
+			nominal_baru+=Number($("#nominal_go_pay").val());
+			if (nominal_baru<=0) {
+				nominal_baru = 0;
+			}
+			$("#total_bayar_hidden").val(nominal_baru);
+
+			// Set nominal yang sudah di format
+			nominal_baru_formatted = formatAngka(nominal_baru);
+			$("#total_bayar").html(nominal_baru_formatted);
+			$("#nominal_go_pay").val(0);
+		}
+		else if (metode_bayar==1) {
+			$("#nominal_go_pay_div").show('fast');
+		}
+	}
+	// / Fungsi untuk menampilkan atau menyembunyikan input nominal bayar
+
 
 	jQuery(document).ready(function($) {
 		// Pastikan radio cabang ketika klik langsung call ajax diatas
@@ -168,6 +204,28 @@
 			$("#link_list").prop('href', '<?php echo base_url('order/data_list/'); ?>'+$(this).val());
 		});
 
+		// Fungsi untuk menampilkan atau menyembunyikan input nominal bayar
+		$(".radio_metode_bayar").on('ifChecked', function(event) {
+			tampilkan_nominal_bayar($(this).val());
+		});
+		// / Fungsi untuk menampilkan atau menyembunyikan input nominal bayar
+
+		$(".hitung-total, #nominal_go_pay").on('change', function(event) {
+			var nominal_baru = 0;
+			$('.hitung-total').each(function() {
+        nominal_baru += Number($(this).val());
+    	});
+			nominal_baru-=Number($("#nominal_go_pay").val());
+			if (nominal_baru<=0) {
+				nominal_baru = 0;
+			}
+			$("#total_bayar_hidden").val(nominal_baru);
+
+			// Set nominal yang sudah di format
+			nominal_baru_formatted = formatAngka(nominal_baru);
+			$("#total_bayar").html(nominal_baru_formatted);
+
+		});
 
 		// // Disable tombol setelah di klik, menghindari kirim data 2 kali
 		// $("#simpan").on('click', function(event) {
