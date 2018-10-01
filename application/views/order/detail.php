@@ -32,6 +32,7 @@
 				$motor         = ($data->motor != "") ? $data->motor : "-";
 				$nomor_polisi  = ($data->nomor_polisi != "") ? $data->nomor_polisi : "-";
 				$foto          = $data->foto;
+				$metode_pesan  = $data->nama_metode_pesan;
 				$jenis_velg    = $data->nama_jenis_velg;
 				$nama_cabang   = $data->nama_cabang;
 				$nama_regional = $data->nama_regional;
@@ -88,6 +89,12 @@
 										<label for="sumber_info" class="control-label col-sm-3"><i class="fa fa-question"></i> &nbsp; Sumber Info</label>
 										<div class="col-sm-9 col-md-8">
 											<p class="form-control-static well well-sm"><?php echo $sumber_info ?></p>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="metode_pesan" class="control-label col-sm-3"><i class="fa fa-bookmark"></i> &nbsp; Metode Pesan</label>
+										<div class="col-sm-9 col-md-8">
+											<p class="form-control-static well well-sm"><?php echo $metode_pesan ?></p>
 										</div>
 									</div>
 									<div class="form-group">
@@ -251,7 +258,7 @@
 												<?php endif; ?>
 												</div>
 												<div class="col-md-6 col-sm-12">
-													<div class="well well-sm text-center">
+													<div class="well well-sm text-center label-primary">
 														<p><strong>Total Bayar Tunai</strong> </p>
 														<h1 id="total_bayar">Rp <?php echo number_format(($total_bayar!="") ? $total_bayar : $total_bayar_organik, '0', ',' , '.'); ?></h1>
 													</div>

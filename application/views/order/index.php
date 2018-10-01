@@ -67,6 +67,19 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label for="metode_pesan" class="control-label col-sm-3">* Metode Pesan</label>
+										<div class="col-sm-9 col-md-7">
+										<?php foreach ($metode_pesan->result() as $mpid): ?>
+											<div class="radio">
+												<label>
+													<input type="radio" name="metode_pesan" value="<?php echo $mpid->id ?>" <?php echo set_radio('metode_pesan', $mpid->id); ?> required>
+													<?php echo $mpid->nama; ?>
+												</label>
+											</div>
+										<?php endforeach; ?>
+										</div>
+									</div>
+									<div class="form-group">
 										<label for="cabang" class="control-label col-sm-3">* Cabang</label>
 										<div class="col-sm-9 col-md-7">
 										<?php foreach ($cabang->result() as $cid): ?>
@@ -268,50 +281,51 @@
 											</div>
 									  <!-- </div> -->
 										<div class="panel-footer">
-											&nbsp;
-										</div>
-									</div>
-									<!-- <hr> -->
-									<legend>Pembayaran</legend>
-									<div class="row">
-										<div class="col-md-6 col-sm-12">
-										  <div class="form-group">
-												<label for="metode_bayar" class="control-label col-sm-6 col-md-4">* Metode Bayar</label>
-												<div class="col-sm-7 col-md-8">
-													<div class="radio">
-														<label>
-															<input type="radio" name="metode_bayar" value="0" <?php echo set_radio('metode_bayar', '0'); ?> class="radio_metode_bayar" required>
-															Reguler
-														</label>
-														<label>
-															<input type="radio" name="metode_bayar" value="1" <?php echo set_radio('metode_bayar', '1'); ?> class="radio_metode_bayar" required>
-															Go Pay
-														</label>
+											<div class="row">
+												<div class="col-md-6 col-sm-12">
+												  <div class="form-group">
+														<label for="metode_bayar" class="control-label col-sm-6 col-md-4">* Metode Bayar</label>
+														<div class="col-sm-7 col-md-8">
+															<div class="radio">
+																<label>
+																	<input type="radio" name="metode_bayar" value="0" <?php echo set_radio('metode_bayar', '0'); ?> class="radio_metode_bayar" required>
+																	Reguler
+																</label>
+																<label>
+																	<input type="radio" name="metode_bayar" value="1" <?php echo set_radio('metode_bayar', '1'); ?> class="radio_metode_bayar" required>
+																	Go Pay
+																</label>
+															</div>
+														</div>
+												  </div>
+												  <div class="form-group" id="nominal_go_pay_div" <?php if(set_value('nominal_go_pay') == 0): ?> style="display:none" <?php endif ?>>
+														<style media="screen">
+														input,img{ display:inline-block;}
+														</style>
+														<div class="col-sm-12 col-md-12">
+															<div class="input-group">
+																<span class="input-group-addon">
+																	<img src="<?php echo base_url("assets/images/go-pay.png") ?>" alt="Go Pay" class="img" height="20px">
+																</span>
+																<input type="number" name="nominal_go_pay" id="nominal_go_pay" class="form-control kurangi-total" value="<?php echo set_value('nominal_go_pay') ?>" min="0" onkeypress="return input_angka(event)">
+															</div>
+														</div>
+												  </div>
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="well well-sm text-center label-primary">
+														<p><strong>Total Bayar Tunai</strong> </p>
+														<input type="hidden" name="total_bayar_hidden" id="total_bayar_hidden" value="<?php echo set_value('total_bayar_hidden') ?>">
+														<h1 id="total_bayar">
+															<?php if (set_value('total_bayar_hidden')>0): echo "Rp ". number_format(set_value('total_bayar_hidden'), 0, ",", "."); ?>
+															<?php else: ?>Rp 0
+														<?php endif; ?></h1>
 													</div>
 												</div>
-										  </div>
-										  <div class="form-group" id="nominal_go_pay_div" style="display:none">
-												<style media="screen">
-												input,img{ display:inline-block;}
-												</style>
-												<div class="col-sm-12 col-md-12">
-													<div class="input-group">
-														<span class="input-group-addon">
-															<img src="<?php echo base_url("assets/images/go-pay.png") ?>" alt="Go Pay" class="img" height="20px">
-														</span>
-														<input type="number" name="nominal_go_pay" id="nominal_go_pay" class="form-control kurangi-total" value="0" min="0" onkeypress="return input_angka(event)">
-													</div>
-												</div>
-										  </div>
-										</div>
-										<div class="col-md-6 col-sm-12">
-											<div class="well well-sm text-center">
-												<p><strong>Total Bayar Tunai</strong> </p>
-												<input type="hidden" name="total_bayar_hidden" id="total_bayar_hidden" value="">
-												<h1 id="total_bayar">Rp 0</h1>
 											</div>
 										</div>
 									</div>
+
 								</div>
 							</div>
 						</div>

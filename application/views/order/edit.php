@@ -27,6 +27,7 @@
 				$alamat_lokasi = $data->alamat_lokasi;
 				$status_id     = $data->status;
 				$status        = $data->nama_status;
+				$metode_pesan  = $data->metode_pesan;
 				$motor         = $data->motor;
 				$nomor_polisi  = $data->nomor_polisi;
 				$foto          = $data->foto;
@@ -86,6 +87,19 @@
 											<div class="col-sm-9 col-md-5">
 												<input type="text" name="sumber_info" id="sumber_info" class="form-control" value="<?php if (!set_value('sumber_info')) { echo $sumber_info; } else { echo set_value('sumber_info'); } ?>">
 												<!-- <p class="form-control-static well well-sm"><?php echo $sumber_info ?></p> -->
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="metode_pesan" class="control-label col-sm-3">* Metode Pesan</label>
+											<div class="col-sm-9 col-md-7">
+											<?php foreach ($metode_pesan_list->result() as $mpid): ?>
+												<div class="radio">
+													<label>
+														<input type="radio" name="metode_pesan" value="<?php echo $mpid->id ?>" <?php if (!set_radio('metode_pesan', $mpid->id)) { echo ($mpid->id == $metode_pesan) ? "checked" : ""; } else {echo set_radio('metode_pesan', $mpid->id);} ?> required>
+														<?php echo $mpid->nama; ?>
+													</label>
+												</div>
+											<?php endforeach; ?>
 											</div>
 										</div>
 										<div class="form-group">

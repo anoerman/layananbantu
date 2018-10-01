@@ -12,19 +12,20 @@ class Order_model extends CI_Model
 	{
 		parent::__construct();
 
-		$this->main_table        = 'layanan_bantu';
-		$this->detail_table      = 'layanan_bantu_detail';
-		$this->main_bayar_table  = 'layanan_bantu_bayar';
-		$this->main_status_table = 'layanan_bantu_status';
-		$this->main_batal_table  = 'layanan_bantu_batal';
-		$this->main_ubah_table   = 'layanan_bantu_ubah';
-		$this->auto_produk_table = 'master_auto_produk';
-		$this->user_table        = 'users';
-		$this->status_table      = 'master_status';
-		$this->jenis_velg_table  = 'master_jenis_velg';
-		$this->cabang_table      = 'master_cabang';
-		$this->regional_table    = 'master_regional';
-		$this->loggedinuser      = $this->ion_auth->user()->row();
+		$this->main_table         = 'layanan_bantu';
+		$this->detail_table       = 'layanan_bantu_detail';
+		$this->main_bayar_table   = 'layanan_bantu_bayar';
+		$this->main_status_table  = 'layanan_bantu_status';
+		$this->main_batal_table   = 'layanan_bantu_batal';
+		$this->main_ubah_table    = 'layanan_bantu_ubah';
+		$this->auto_produk_table  = 'master_auto_produk';
+		$this->user_table         = 'users';
+		$this->status_table       = 'master_status';
+		$this->jenis_velg_table   = 'master_jenis_velg';
+		$this->cabang_table       = 'master_cabang';
+		$this->metode_pesan_table = 'master_metode_pesan';
+		$this->regional_table     = 'master_regional';
+		$this->loggedinuser       = $this->ion_auth->user()->row();
 	}
 
 	/**
@@ -223,6 +224,7 @@ class Order_model extends CI_Model
 			$this->user_table.".cabang_id, ".
 			"user2.first_name AS cs_fn, ".
 			"user2.last_name AS cs_ln, ".
+			$this->metode_pesan_table.".nama AS nama_metode_pesan, ".
 			$this->status_table.".nama AS nama_status, ".
 			$this->jenis_velg_table.".nama AS nama_jenis_velg, ".
 			$this->cabang_table.".nama AS nama_cabang, ".
@@ -235,6 +237,7 @@ class Order_model extends CI_Model
 		$this->db->join($this->user_table, $this->main_table.".toko = ".$this->user_table.".username", "left");
 		$this->db->join($this->user_table ." AS user2", $this->main_table.".created_by = user2.username", "left");
 		$this->db->join($this->status_table, $this->main_table.".status = ".$this->status_table.".id", "left");
+		$this->db->join($this->metode_pesan_table, $this->main_table.".metode_pesan = ".$this->metode_pesan_table.".id", "left");
 		$this->db->join($this->jenis_velg_table, $this->main_table.".jenis_velg = ".$this->jenis_velg_table.".id", "left");
 		$this->db->join($this->cabang_table, $this->main_table.".cabang = ".$this->cabang_table.".id", "left");
 		$this->db->join($this->regional_table, $this->main_table.".regional = ".$this->regional_table.".id", "left");
@@ -703,6 +706,7 @@ class Order_model extends CI_Model
 	public function update_order_status($kode, $datas)
 	{
 		// Set new var
+		$lb_id       = $datas['lb_id'];
 		$data_status = $datas;
 
 		// user and datetime
@@ -714,7 +718,7 @@ class Order_model extends CI_Model
 		$this->db->where($this->main_table.".kode", $kode);
 		if ($this->db->update($this->main_table, $datas)) {
 			// Insert status table
-			if ($this->insert_data_status($data_status)) {
+			if ($this->insert_data_status($lb_id, $data_status)) {
 				return TRUE;
 			}
 			return FALSE;

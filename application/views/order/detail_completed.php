@@ -29,6 +29,7 @@
 				$alamat_lokasi = $data->alamat_lokasi;
 				$status_id     = $data->status;
 				$status        = $data->nama_status;
+				$metode_pesan  = $data->nama_metode_pesan;
 				$motor         = ($data->motor != "") ? $data->motor : "-";
 				$nomor_polisi  = ($data->nomor_polisi != "") ? $data->nomor_polisi : "-";
 				$foto          = $data->foto;
@@ -90,6 +91,12 @@
 										<label for="sumber_info" class="control-label col-sm-3"><i class="fa fa-question"></i> &nbsp; Sumber Info</label>
 										<div class="col-sm-9 col-md-8">
 											<p class="form-control-static well well-sm"><?php echo $sumber_info ?></p>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="metode_pesan" class="control-label col-sm-3"><i class="fa fa-bookmark"></i> &nbsp; Metode Pesan</label>
+										<div class="col-sm-9 col-md-8">
+											<p class="form-control-static well well-sm"><?php echo $metode_pesan ?></p>
 										</div>
 									</div>
 									<div class="form-group">

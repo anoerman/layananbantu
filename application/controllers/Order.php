@@ -36,6 +36,7 @@ class Order extends CI_Controller {
 				'jenis_velg_model',
 				'cabang_model',
 				'regional_model',
+				'metode_pesan_model',
 			)
 		);
 
@@ -115,6 +116,7 @@ class Order extends CI_Controller {
 						'nomor_polisi'  => $this->input->post('nomor_polisi'),
 						'jenis_velg'    => $this->input->post('jenis_velg'),
 						'sumber_info'   => $this->input->post('sumber_info'),
+						'metode_pesan'  => $this->input->post('metode_pesan'),
 						'cabang'        => $this->input->post('cabang'),
 						'regional'      => $this->input->post('regional_id'),
 						'toko'          => $this->input->post('toko'),
@@ -142,6 +144,7 @@ class Order extends CI_Controller {
 
 					// Order bayar array
 					$data_bayar = array(
+						'lb_kode'      => $kode,
 						'metode_bayar' => $this->input->post('metode_bayar'),
 						'go_pay_bayar' => $this->input->post('nominal_go_pay'),
 						'total_bayar'  => $this->input->post('total_bayar_hidden'),
@@ -195,11 +198,12 @@ class Order extends CI_Controller {
 			}
 
 			// set the flash data error message if there is one
-			$this->data['message']    = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			$this->data['cabang']     = $this->cabang_model->get_cabang("", "1");
-			$this->data['toko']       = $this->toko_model->get_toko_aktif($this->data['user_cabang']);
-			$this->data['last_query'] = $this->db->last_query();
-			$this->data['jenis_velg'] = $this->jenis_velg_model->get_jenis_velg();
+			$this->data['message']      = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			$this->data['cabang']       = $this->cabang_model->get_cabang("", "1");
+			$this->data['toko']         = $this->toko_model->get_toko_aktif($this->data['user_cabang']);
+			$this->data['metode_pesan'] = $this->metode_pesan_model->get_metode_pesan("", "1");
+			$this->data['jenis_velg']   = $this->jenis_velg_model->get_jenis_velg();
+			$this->data['last_query']   = $this->db->last_query();
 
 			$this->load->view('partials/_alte_header', $this->data);
 			$this->load->view('partials/_alte_menu');
@@ -854,6 +858,14 @@ class Order extends CI_Controller {
 						}
 					}
 
+					// Order bayar array
+					$data_bayar = array(
+						'lb_kode'      => $kode,
+						'metode_bayar' => $this->input->post('metode_bayar'),
+						'go_pay_bayar' => $this->input->post('nominal_go_pay'),
+						'total_bayar'  => $this->input->post('total_bayar_hidden'),
+					);
+
 					// check to see if we are updating the data
 					if ($this->order_model->update_data($data, $kode)) {
 						// Hapus semua data yang tidak di aktualkan
@@ -871,7 +883,7 @@ class Order extends CI_Controller {
 							'status'  => '6',
 						);
 
-						if ($this->order_model->insert_data_status($data_status)) {
+						if ($this->order_model->insert_data_status($lb_id,  $data_status)) {
 							// Set message
 							$this->session->set_flashdata('message',
 								$this->config->item('message_start_delimiter', 'ion_auth')
@@ -1144,18 +1156,21 @@ class Order extends CI_Controller {
 			$this->data['data_detail']   = $this->order_model->get_order_detail_by_kode($kode);
 
 			foreach ($this->data['data_header']->result() as $current_header) {
-				$current_cabang   = $current_header->cabang;
-				$current_regional = $current_header->regional;
-				$current_toko     = $current_header->toko;
+				$current_metode_pesan = $current_header->metode_pesan;
+				$current_cabang       = $current_header->cabang;
+				$current_regional     = $current_header->regional;
+				$current_toko         = $current_header->toko;
 			}
 
-			$this->data['cabang_list']      = $this->cabang_model->get_cabang("", "1");
-			$this->data['current_cabang']   = $current_cabang;
-			$this->data['regional_list']    = $this->regional_model->get_regional_by_cabang($current_cabang);
-			$this->data['current_regional'] = $current_regional;
-			$this->data['jenis_velg_list']  = $this->jenis_velg_model->get_jenis_velg();
-			$this->data['toko_list']        = $this->toko_model->get_toko_by_regional($current_regional);
-			$this->data['current_toko']     = $current_toko;
+			$this->data['metode_pesan_list']    = $this->metode_pesan_model->get_metode_pesan("", "1");
+			$this->data['current_metode_pesan'] = $current_metode_pesan;
+			$this->data['cabang_list']          = $this->cabang_model->get_cabang("", "1");
+			$this->data['current_cabang']       = $current_cabang;
+			$this->data['regional_list']        = $this->regional_model->get_regional_by_cabang($current_cabang);
+			$this->data['current_regional']     = $current_regional;
+			$this->data['jenis_velg_list']      = $this->jenis_velg_model->get_jenis_velg();
+			$this->data['toko_list']            = $this->toko_model->get_toko_by_regional($current_regional);
+			$this->data['current_toko']         = $current_toko;
 
 			// set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');

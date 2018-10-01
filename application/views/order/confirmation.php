@@ -27,11 +27,16 @@
 				$alamat_lokasi   = $data->alamat_lokasi;
 				$status_id       = $data->status;
 				$status          = $data->nama_status;
+				$metode_pesan_id = $data->metode_pesan;
+				$metode_pesan    = $data->nama_metode_pesan;
 				$motor           = ($data->motor != "") ? $data->motor : "-";
 				$nomor_polisi    = ($data->nomor_polisi != "") ? $data->nomor_polisi : "-";
 				$jenis_velg_id   = $data->jenis_velg;
 				$nama_jenis_velg = $data->nama_jenis_velg;
 				$sumber_info     = ($data->sumber_info != "") ? $data->sumber_info : "-";
+				$metode_bayar    = ($data->metode_bayar == 1) ? "Go Pay" : "Reguler";
+				$go_pay_bayar    = ($data->metode_bayar == 1) ? $data->go_pay_bayar : 0;
+				$total_bayar     = $data->total_bayar;
 			}
 			?>
 
@@ -82,6 +87,12 @@
 												<p class="form-control-static well well-sm"><?php echo $sumber_info ?></p>
 											</div>
 										</div>
+										<div class="form-group">
+											<label for="metode_pesan" class="control-label col-sm-3"><i class="fa fa-bookmark"></i> &nbsp; Metode Pesan</label>
+											<div class="col-sm-9 col-md-8">
+												<p class="form-control-static well well-sm"><?php echo $metode_pesan ?></p>
+											</div>
+										</div>
 										<!-- <hr> -->
 										<legend>Info Kendaraan</legend>
 										<div class="form-group">
@@ -125,59 +136,107 @@
 										</div> -->
 										<!-- <hr> -->
 										<legend>Detail Pesanan</legend>
-										<div class="table-responsive">
-											<table class="table table-hover table-striped table-bordered">
-												<thead>
-													<tr>
-														<th>
-															Produk & Harga
-														</th>
-														<!-- <th class="text-center">
-															<button type="button" class="btn btn-primary" name="addNewRow"><span class="glyphicon glyphicon-plus"></span></button>
-														</th> -->
-													</tr>
-												</thead>
-												<tbody>
-												<?php $idx = 0;
-												foreach ($data_detail->result() as $detail): $idx++; ?>
-													<tr>
-														<td>
-															<div class="col-md-6 col-sm-12">
+										<div class="panel panel-primary">
+										  <div class="panel-heading">
+										    <h3 class="panel-title">Produk dan Harga</h3>
+										  </div>
+
+											<div class="table-responsive">
+												<table class="table table-hover table-striped table-bordered">
+													<thead>
+														<tr>
+															<th>
+																Produk & Harga
+															</th>
+															<!-- <th class="text-center">
+																<button type="button" class="btn btn-primary" name="addNewRow"><span class="glyphicon glyphicon-plus"></span></button>
+															</th> -->
+														</tr>
+													</thead>
+													<tbody>
+													<?php $idx = 0;
+													foreach ($data_detail->result() as $detail): $idx++; ?>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																		<span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																		<input type="text" name="produk[]" id="produk<?php echo $idx; ?>" class="form-control produk" value="<?php echo $detail->produk; ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																		<span class="input-group-addon">Rp. </span>
+																		<input type="number" name="harga[]" id="harga<?php echo $idx; ?>" class="form-control hitung-total" min="0" max="2500000" value="<?php echo $detail->harga; ?>" placeholder="Harga Produk">
+																	</div>
+																</div>
+															</td>
+														</tr>
+													<?php endforeach; ?>
+													<?php for ($i=$idx; $i < 7; $i++) { ?>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	  <input type="text" name="produk[]" id="produk<?php echo $i; ?>" class="form-control produk" value="<?php echo set_value('produk[$i]'); ?>" placeholder="Tulis produk jika ada tambahan">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon">Rp. </span>
+																		<input type="number" name="harga[]" id="harga<?php echo $i; ?>" class="form-control hitung-total" min="0" max="2500000" value="<?php echo set_value('harga[$i]'); ?>" placeholder="Harga Produk">
+																	</div>
+																</div>
+															</td>
+														</tr>
+													<?php } ?>
+													</tbody>
+												</table>
+											</div>
+
+											<div class="panel-footer">
+												<!-- Info Total Bayar dan potongan Go Pay -->
+												<div class="row">
+													<div class="col-md-6 col-sm-12">
+														<?php if ($go_pay_bayar!=0) : ?>
+													  <div class="form-group">
+															<style media="screen">
+															input,img{ display:inline-block;}
+															</style>
+															<div class="col-sm-12 text-center">
+																<h4>Metode Pembayaran : Go Pay.</h4>
+																<p>Silahkan tagihkan ke konsumen jumlah total bayar berikut.<br>Total bayar sudah dikurangi oleh jumlah nominal Go Pay dibawah ini.</p>
 																<div class="input-group">
-																	<span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-																	<input type="text" name="produk[]" id="produk<?php echo $idx; ?>" class="form-control produk" value="<?php echo $detail->produk; ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	<span class="input-group-addon">
+																		<img src="<?php echo base_url("assets/images/go-pay.png") ?>" alt="Go Pay" class="img" height="20px">
+																	</span>
+																	<input type="number" name="nominal_go_pay2" class="form-control" value="<?php echo number_format($go_pay_bayar, '0', ',' , '.') ?>" min="0" readonly>
+																	<input type="hidden" name="nominal_go_pay" id="nominal_go_pay" class="form-control kurangi-total" value="<?php echo $go_pay_bayar ?>" min="0" onkeypress="return input_angka(event)">
 																</div>
 															</div>
-															<div class="col-md-6 col-sm-12">
-																<div class="input-group">
-																	<span class="input-group-addon">Rp. </span>
-																	<input type="number" name="harga[]" id="harga<?php echo $idx; ?>" class="form-control" min="0" max="2500000" value="<?php echo $detail->harga; ?>" placeholder="Harga Produk">
-																</div>
+													  </div>
+													<?php else: ?>
+														<div class="form-group">
+															<div class="col-md-12 text-center">
+																<h4>Metode Pembayaran : Reguler.</h4>
+																<p>Silahkan tagihkan ke konsumen jumlah total bayar berikut.</p>
 															</div>
-														</td>
-													</tr>
-												<?php endforeach; ?>
-												<?php for ($i=$idx; $i < 7; $i++) { ?>
-													<tr>
-														<td>
-															<div class="col-md-6 col-sm-12">
-																<div class="input-group">
-																  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-																  <input type="text" name="produk[]" id="produk<?php echo $i; ?>" class="form-control produk" value="<?php echo set_value('produk[$i]'); ?>" placeholder="Tulis produk jika ada tambahan">
-																</div>
-															</div>
-															<div class="col-md-6 col-sm-12">
-																<div class="input-group">
-																  <span class="input-group-addon">Rp. </span>
-																	<input type="number" name="harga[]" id="harga<?php echo $i; ?>" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[$i]'); ?>" placeholder="Harga Produk">
-																</div>
-															</div>
-														</td>
-													</tr>
-												<?php } ?>
-												</tbody>
-											</table>
+														</div>
+													<?php endif; ?>
+													</div>
+													<div class="col-md-6 col-sm-12">
+														<div class="well well-sm text-center label-primary">
+															<p><strong>Total Bayar Tunai</strong> </p>
+															<input type="hidden" name="total_bayar_hidden" id="total_bayar_hidden" value="<?php echo $total_bayar ?>">
+															<h1 id="total_bayar">Rp <?php echo number_format(($total_bayar!="") ? $total_bayar : $total_bayar_organik, '0', ',' , '.'); ?></h1>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
+
+
 									</div>
 								</div>
 							</div>
