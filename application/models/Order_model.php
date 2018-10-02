@@ -727,6 +727,30 @@ class Order_model extends CI_Model
 	}
 	// End of update_order_status
 
+	/**
+	*	Update Data Bayar
+	*	From controller
+	*
+	*	@param 		array
+	*	@param 		string
+	*	@return 	bool
+	*
+	*/
+	public function update_data_bayar($datas, $lb_id)
+	{
+		// user and datetime
+		$datas['updated_by'] = $this->loggedinuser->username;
+		$this->db->set('updated_on', 'NOW()', FALSE);
+
+		// Update to main table
+		$this->db->where('lb_id', $lb_id);
+		if ($this->db->update($this->main_bayar_table, $datas)) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+	// End of update_data_bayar
+
 
 	/**
 	*	Actual-ing data detail

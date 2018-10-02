@@ -239,7 +239,7 @@
 														</style>
 														<div class="col-sm-12 text-center">
 															<h4>Metode Pembayaran : Go Pay.</h4>
-															<p>Silahkan tagihkan ke konsumen jumlah total bayar berikut.<br>Total bayar sudah dikurangi oleh jumlah nominal Go Pay dibawah ini.</p>
+															<p>Silahkan tagihkan ke konsumen jumlah total tagihan sebagai berikut.<br>Total tagihan sudah dikurangi oleh jumlah nominal Go Pay dibawah ini.</p>
 															<div class="input-group">
 																<span class="input-group-addon">
 																	<img src="<?php echo base_url("assets/images/go-pay.png") ?>" alt="Go Pay" class="img" height="20px">
@@ -259,7 +259,7 @@
 												</div>
 												<div class="col-md-6 col-sm-12">
 													<div class="well well-sm text-center label-primary">
-														<p><strong>Total Bayar Tunai</strong> </p>
+														<p><strong>Total Tagih Tunai</strong> </p>
 														<h1 id="total_bayar">Rp <?php echo number_format(($total_bayar!="") ? $total_bayar : $total_bayar_organik, '0', ',' , '.'); ?></h1>
 													</div>
 												</div>

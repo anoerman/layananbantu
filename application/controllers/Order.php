@@ -83,6 +83,7 @@ class Order extends CI_Controller {
 			$this->form_validation->set_rules('motor', 'Nama Motor', 'trim|addslashes');
 			$this->form_validation->set_rules('nomor_polisi', 'Nomor Polisi', 'alpha_numeric_spaces|trim');
 			$this->form_validation->set_rules('jenis_velg', 'Jenis Velg', 'alpha_numeric_spaces|trim');
+			$this->form_validation->set_rules('metode_bayar', 'Metode Bayar', 'required');
 			$this->form_validation->set_rules('produk[]', 'Produk', 'addslashes|trim');
 			$this->form_validation->set_rules('harga[]', 'Harga', 'numeric|addslashes|trim');
 
@@ -868,6 +869,10 @@ class Order extends CI_Controller {
 
 					// check to see if we are updating the data
 					if ($this->order_model->update_data($data, $kode)) {
+
+						// Update bayar data
+						$this->order_model->update_data_bayar($data_bayar, $lb_id);
+						
 						// Hapus semua data yang tidak di aktualkan
 						$data_hapus['hapus']      = '1';
 						$data_hapus['keterangan'] = 'Data dihapus karena tidak sesuai dengan request awal';
@@ -1037,6 +1042,7 @@ class Order extends CI_Controller {
 			$this->form_validation->set_rules('motor', 'Nama Motor', 'trim|addslashes|required');
 			$this->form_validation->set_rules('nomor_polisi', 'Nomor Polisi', 'alpha_numeric_spaces|trim');
 			$this->form_validation->set_rules('jenis_velg', 'Jenis Velg', 'alpha_numeric_spaces|trim');
+			$this->form_validation->set_rules('metode_bayar', 'Metode Bayar', 'required');
 			$this->form_validation->set_rules('produk[]', 'Produk', 'addslashes|trim');
 			$this->form_validation->set_rules('harga[]', 'Harga', 'numeric|addslashes|trim');
 
@@ -1066,6 +1072,7 @@ class Order extends CI_Controller {
 						'nomor_polisi'  => $this->input->post('nomor_polisi'),
 						'jenis_velg'    => $this->input->post('jenis_velg'),
 						'sumber_info'   => $this->input->post('sumber_info'),
+						'metode_pesan'  => $this->input->post('metode_pesan'),
 						'cabang'        => $this->input->post('cabang'),
 						'regional'      => $this->input->post('regional_id'),
 						'toko'          => $this->input->post('toko'),
@@ -1100,8 +1107,20 @@ class Order extends CI_Controller {
 						}
 					}
 
+					// Order bayar array
+					$data_bayar = array(
+						'lb_kode'      => $kode,
+						'metode_bayar' => $this->input->post('metode_bayar'),
+						'go_pay_bayar' => $this->input->post('nominal_go_pay'),
+						'total_bayar'  => $this->input->post('total_bayar_hidden'),
+					);
+
 					// check to see if we are updating the data
 					if ($this->order_model->update_data($data, $kode)) {
+
+						// Update bayar data
+						$this->order_model->update_data_bayar($data_bayar, $lb_id);
+
 						// Hapus semua data yang tidak di aktualkan
 						$data_hapus['hapus']      = '1';
 						$data_hapus['keterangan'] = 'Data dihapus saat proses perubahan data';

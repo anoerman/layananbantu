@@ -199,7 +199,7 @@
 												<!-- Info Total Bayar dan potongan Go Pay -->
 												<div class="row">
 													<div class="col-md-6 col-sm-12">
-														<?php if ($go_pay_bayar!=0) : ?>
+													<?php if ($go_pay_bayar!=0) : ?>
 													  <div class="form-group">
 															<style media="screen">
 															input,img{ display:inline-block;}
@@ -220,22 +220,23 @@
 														<div class="form-group">
 															<div class="col-md-12 text-center">
 																<h4>Metode Pembayaran : Reguler.</h4>
-																<p>Silahkan tagihkan ke konsumen jumlah total bayar berikut.</p>
+																<p>Silahkan tagihkan ke konsumen jumlah total tagihan sebagai berikut.</p>
 															</div>
 														</div>
 													<?php endif; ?>
 													</div>
 													<div class="col-md-6 col-sm-12">
 														<div class="well well-sm text-center label-primary">
-															<p><strong>Total Bayar Tunai</strong> </p>
+															<p><strong>Total Tagih Tunai</strong> </p>
 															<input type="hidden" name="total_bayar_hidden" id="total_bayar_hidden" value="<?php echo $total_bayar ?>">
 															<h1 id="total_bayar">Rp <?php echo number_format(($total_bayar!="") ? $total_bayar : $total_bayar_organik, '0', ',' , '.'); ?></h1>
 														</div>
 													</div>
 												</div>
 											</div>
-										</div>
 
+										</div>
+										<!-- end of panel -->
 
 									</div>
 								</div>

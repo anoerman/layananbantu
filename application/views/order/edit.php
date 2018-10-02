@@ -35,6 +35,9 @@
 				$jenis_velg    = $data->nama_jenis_velg;
 				$sumber_info   = $data->sumber_info;
 				$cabang        = $data->cabang;
+				$metode_bayar  = $data->metode_bayar;
+				$go_pay_bayar  = ($data->metode_bayar == 1) ? $data->go_pay_bayar : 0;
+				$total_bayar   = $data->total_bayar;
 			}
 			?>
 
@@ -90,7 +93,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="metode_pesan" class="control-label col-sm-3">* Metode Pesan</label>
+											<label for="metode_pesan" class="control-label col-sm-3"><i class="fa fa-bookmark"></i> &nbsp; Metode Pesan</label>
 											<div class="col-sm-9 col-md-7">
 											<?php foreach ($metode_pesan_list->result() as $mpid): ?>
 												<div class="radio">
@@ -103,7 +106,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="cabang" class="control-label col-sm-3">* Cabang</label>
+											<label for="cabang" class="control-label col-sm-3"><i class="fa fa-globe"></i> &nbsp; Cabang</label>
 											<div class="col-sm-9 col-md-7">
 											<?php foreach ($cabang_list->result() as $cid): ?>
 												<div class="radio">
@@ -116,7 +119,7 @@
 											</div>
 										</div>
 										<div class="form-group" id="div_regional">
-											<label for="regional" class="control-label col-sm-3">Regional </label>
+											<label for="regional" class="control-label col-sm-3"><i class="fa fa-globe"></i> &nbsp;Regional </label>
 											<div class="col-sm-9 col-md-5" id="div_regional_select">
 				              <?php if (count($regional_list->result()) > 0) { ?>
 				                <select name="regional_id" id="regional_id" class="form-control select2" style="width:100%" onchange="tampilkan_toko_regional(this.value)">
@@ -132,7 +135,7 @@
 											</div>
 										</div>
 										<div class="form-group" id="div_toko">
-											<label for="toko" class="control-label col-sm-3">* Toko</label>
+											<label for="toko" class="control-label col-sm-3"><i class="fa fa-building"></i> &nbsp; Toko</label>
 											<div class="col-sm-9 col-md-5" id="div_toko_select">
 												<select name="toko" id="toko" class="form-control select2" style="width:100%">
 													<option value="<?php echo $current_toko; ?>" selected><?php echo $toko; ?></option>
@@ -191,59 +194,102 @@
 										<?php endif; ?>
 										<!-- <hr> -->
 										<legend>Detail Pesanan</legend>
-										<div class="table-responsive">
-											<table class="table table-hover table-striped table-bordered">
-												<thead>
-													<tr>
-														<th>
-															Produk & Harga
-														</th>
-														<!-- <th class="text-center">
-															<button type="button" class="btn btn-primary" name="addNewRow"><span class="glyphicon glyphicon-plus"></span></button>
-														</th> -->
-													</tr>
-												</thead>
-												<tbody>
-												<?php $idx = 0;
-												foreach ($data_detail->result() as $detail): $idx++; ?>
-													<tr>
-														<td>
-															<div class="col-md-6 col-sm-12">
-																<div class="input-group">
-																	<span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-																	<input type="text" name="produk[]" id="produk<?php echo $idx; ?>" class="form-control produk" value="<?php echo $detail->produk; ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+										<div class="panel panel-primary">
+										  <div class="panel-heading">
+										    <h3 class="panel-title">Produk dan Harga</h3>
+										  </div>
+
+											<div class="table-responsive">
+												<table class="table table-hover table-striped table-bordered">
+													<tbody>
+													<?php $idx = 0;
+													foreach ($data_detail->result() as $detail): $idx++; ?>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																		<span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																		<input type="text" name="produk[]" id="produk<?php echo $idx; ?>" class="form-control produk" value="<?php echo $detail->produk; ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																		<span class="input-group-addon">Rp. </span>
+																		<input type="number" name="harga[]" id="harga<?php echo $idx; ?>" class="form-control hitung-total" min="0" max="2500000" value="<?php echo $detail->harga; ?>" placeholder="Harga Produk">
+																	</div>
+																</div>
+															</td>
+														</tr>
+													<?php endforeach; ?>
+													<?php for ($i=$idx; $i < 7; $i++) { ?>
+														<tr>
+															<td>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
+																	  <input type="text" name="produk[]" id="produk<?php echo $i; ?>" class="form-control produk" value="<?php echo set_value('produk[$i]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="input-group">
+																	  <span class="input-group-addon">Rp. </span>
+																		<input type="number" name="harga[]" id="harga<?php echo $i; ?>" class="form-control hitung-total" min="0" max="2500000" value="<?php echo set_value('harga[$i]'); ?>" placeholder="Harga Produk">
+																	</div>
+																</div>
+															</td>
+														</tr>
+													<?php } ?>
+													</tbody>
+												</table>
+											</div>
+
+											<div class="panel-footer">
+												<!-- Info Total Bayar dan potongan Go Pay -->
+												<div class="row">
+													<div class="col-md-6 col-sm-12">
+														<div class="form-group">
+															<label for="metode_bayar" class="control-label col-sm-6 col-md-4">* Metode Bayar</label>
+															<div class="col-sm-7 col-md-8">
+																<div class="radio">
+																	<label>
+																		<input type="radio" name="metode_bayar" value="0" <?php echo ($metode_bayar == 0) ? "checked" : ""; ?> class="radio_metode_bayar" required>
+																		Reguler
+																	</label>
+																	<label>
+																		<input type="radio" name="metode_bayar" value="1" <?php echo ($metode_bayar == 1) ? "checked" : ""; ?> class="radio_metode_bayar" required>
+																		Go Pay
+																	</label>
 																</div>
 															</div>
-															<div class="col-md-6 col-sm-12">
+													  </div>
+													  <div class="form-group" id="nominal_go_pay_div" <?php if($go_pay_bayar == 0): ?> style="display:none" <?php endif ?>>
+															<style media="screen">
+															input,img{ display:inline-block;}
+															</style>
+															<div class="col-sm-12 col-md-12">
 																<div class="input-group">
-																	<span class="input-group-addon">Rp. </span>
-																	<input type="number" name="harga[]" id="harga<?php echo $idx; ?>" class="form-control" min="0" max="2500000" value="<?php echo $detail->harga; ?>" placeholder="Harga Produk">
+																	<span class="input-group-addon">
+																		<img src="<?php echo base_url("assets/images/go-pay.png") ?>" alt="Go Pay" class="img" height="20px">
+																	</span>
+																	<input type="number" name="nominal_go_pay" id="nominal_go_pay" class="form-control kurangi-total" value="<?php echo $go_pay_bayar ?>" min="0" onkeypress="return input_angka(event)">
 																</div>
 															</div>
-														</td>
-													</tr>
-												<?php endforeach; ?>
-												<?php for ($i=$idx; $i < 7; $i++) { ?>
-													<tr>
-														<td>
-															<div class="col-md-6 col-sm-12">
-																<div class="input-group">
-																  <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;</span>
-																  <input type="text" name="produk[]" id="produk<?php echo $i; ?>" class="form-control produk" value="<?php echo set_value('produk[$i]'); ?>" placeholder="Nama Produk ( Cth : Tambal ban / Planeto Silica )">
-																</div>
-															</div>
-															<div class="col-md-6 col-sm-12">
-																<div class="input-group">
-																  <span class="input-group-addon">Rp. </span>
-																	<input type="number" name="harga[]" id="harga<?php echo $i; ?>" class="form-control" min="0" max="2500000" value="<?php echo set_value('harga[$i]'); ?>" placeholder="Harga Produk">
-																</div>
-															</div>
-														</td>
-													</tr>
-												<?php } ?>
-												</tbody>
-											</table>
+													  </div>
+													</div>
+													<div class="col-md-6 col-sm-12">
+														<div class="well well-sm text-center label-primary">
+															<p><strong>Total Tagih Tunai</strong> </p>
+															<input type="hidden" name="total_bayar_hidden" id="total_bayar_hidden" value="<?php echo $total_bayar ?>">
+															<h1 id="total_bayar">Rp <?php echo number_format(($total_bayar!="") ? $total_bayar : $total_bayar_organik, '0', ',' , '.'); ?></h1>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
 										</div>
+										<!-- end of panel -->
+
 									</div>
 								</div>
 							</div>
