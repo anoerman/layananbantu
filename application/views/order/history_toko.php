@@ -55,21 +55,29 @@
 													<span class="glyphicon glyphicon-calendar"></span> &nbsp; <?php echo date_format(date_create($data_sls->tanggal), 'd F Y (H:i:s)'); ?>
 												</div>
 
-											<!--
+
 												<div class="col-md-12 col-sm-12">
-													<span class="glyphicon glyphicon-home"></span> &nbsp; <?php echo $data_sls->first_name; echo ($data_sls->last_name!="") ? " ".$data_sls->last_name : ""; ?>
+													<span class="glyphicon glyphicon-headphones"></span> &nbsp; <?php echo $data_sls->cs_fn; echo ($data_sls->cs_ln!="") ? " ".$data_sls->cs_ln : ""; ?>
 												</div>
 
 												<div class="col-md-12 col-sm-12">
-													<span class="glyphicon glyphicon-comment"></span> &nbsp; <?php echo $data_sls->nama_status; ?>
+													<span class="glyphicon glyphicon-heart"></span> &nbsp; <?php echo $data_sls->nama_status; ?>
 												</div>
-												-->
+
 											</div>
 										</div>
 										<div class="col-md-8 col-sm-12">
 											<div class="row">
 												<div class="col-md-12 col-sm-12">
 													<span class="glyphicon glyphicon-user"></span> &nbsp; <?php echo $data_sls->nama_konsumen; ?>
+												</div>
+
+												<div class="col-md-12 col-sm-12">
+													<span class="fa fa-motorcycle"></span> &nbsp; <?php echo $data_sls->motor; ?>
+												</div>
+
+												<div class="col-md-12 col-sm-12">
+													<span class="glyphicon glyphicon-qrcode"></span> &nbsp; <?php echo $data_sls->nomor_polisi; ?>
 												</div>
 
 												<div class="col-md-12 col-sm-12">

@@ -307,7 +307,7 @@
 																<span class="input-group-addon">
 																	<img src="<?php echo base_url("assets/images/go-pay.png") ?>" alt="Go Pay" class="img" height="20px">
 																</span>
-																<input type="number" name="nominal_go_pay" id="nominal_go_pay" class="form-control kurangi-total" value="<?php echo set_value('nominal_go_pay') ?>" min="0" onkeypress="return input_angka(event)">
+																<input type="number" name="nominal_go_pay" id="nominal_go_pay" class="form-control kurangi-total" value="<?php echo set_value('nominal_go_pay') ?>" onkeypress="return input_angka(event)">
 															</div>
 														</div>
 												  </div>

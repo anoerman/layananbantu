@@ -180,9 +180,13 @@
 			nominal_baru_formatted = formatAngka(nominal_baru);
 			$("#total_bayar").html(nominal_baru_formatted);
 			$("#nominal_go_pay").val(0);
+			$("#nominal_go_pay").prop('required', '');
+			$("#nominal_go_pay").prop('min', '0');
 		}
 		else if (metode_bayar==1) {
 			$("#nominal_go_pay_div").show('fast');
+			$("#nominal_go_pay").prop('required', 'required');
+			$("#nominal_go_pay").prop('min', '1');
 		}
 	}
 	// / Fungsi untuk menampilkan atau menyembunyikan input nominal bayar

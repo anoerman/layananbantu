@@ -320,13 +320,26 @@ class Order_model extends CI_Model
 		$this->db->select(
 			$this->main_table.".*, ".
 			$this->user_table.".*, ".
-			$this->status_table.".nama AS nama_status "
+			"user2.first_name AS cs_fn, ".
+			"user2.last_name AS cs_ln, ".
+			$this->metode_pesan_table.".nama AS nama_metode_pesan, ".
+			$this->status_table.".nama AS nama_status, ".
+			$this->cabang_table.".nama AS nama_cabang, ".
+			$this->regional_table.".nama AS nama_regional, ".
+			$this->main_bayar_table.".metode_bayar, ".
+			$this->main_bayar_table.".go_pay_bayar, ".
+			$this->main_bayar_table.".total_bayar "
 		);
 		$this->db->where('status', 6);
 		$this->db->where('hapus', 0);
 		$this->db->where('toko', $toko);
 		$this->db->join($this->user_table, $this->main_table.".toko = ".$this->user_table.".username", "left");
+		$this->db->join($this->user_table ." AS user2", $this->main_table.".created_by = user2.username", "left");
 		$this->db->join($this->status_table, $this->main_table.".status = ".$this->status_table.".id", "left");
+		$this->db->join($this->metode_pesan_table, $this->main_table.".metode_pesan = ".$this->metode_pesan_table.".id", "left");
+		$this->db->join($this->cabang_table, $this->main_table.".cabang = ".$this->cabang_table.".id", "left");
+		$this->db->join($this->regional_table, $this->main_table.".regional = ".$this->regional_table.".id", "left");
+		$this->db->join($this->main_bayar_table, $this->main_table.".id = ".$this->main_bayar_table.".lb_id", "left");
 		$this->db->order_by($this->main_table.".id", "desc");
 
 		// if limit and start provided

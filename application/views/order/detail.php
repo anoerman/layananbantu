@@ -252,7 +252,7 @@
 													<div class="form-group">
 														<div class="col-md-12 text-center">
 															<h4>Metode Pembayaran : Reguler.</h4>
-															<p>Silahkan tagihkan ke konsumen jumlah total bayar berikut.</p>
+															<p>Silahkan tagihkan ke konsumen jumlah total tagih berikut.</p>
 														</div>
 													</div>
 												<?php endif; ?>
