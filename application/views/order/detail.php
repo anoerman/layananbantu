@@ -270,8 +270,9 @@
 							</div>
 						</div>
 						<!-- /.box-body -->
-						<div class="box-footer text-center visible-xs-block">
+						<div class="box-footer text-center">
 						<?php if ($this->ion_auth->in_group('toko')): ?>
+							<div class="visible-xs-block">
 							<?php if ($status_id==1): ?>
 								<button type="button" class="btn btn-success btn-lg" value="Berangkat ke lokasi" onclick="modal_ubah_status(this.value)">Berangkat ke lokasi</button>
 								<input type="hidden" id="url_proses" value="<?php echo base_url('order/proses/'.$kode); ?>">
@@ -283,6 +284,7 @@
 							<?php elseif ($status_id==4): ?>
 								<a href="<?php echo base_url('order/konfirmasi/'.$kode); ?>" class="btn btn-lg btn-success">Konfirmasi Selesai</a>
 							<?php endif; ?>
+							</div>
 						<?php else: ?>
 							<?php if ($status_id>=6): ?>
 								<!-- <a href="<?php echo base_url('order/history'); ?>" class="btn btn-lg btn-primary">Kembali</a> -->
