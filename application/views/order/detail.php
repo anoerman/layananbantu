@@ -270,7 +270,7 @@
 							</div>
 						</div>
 						<!-- /.box-body -->
-						<div class="box-footer text-center">
+						<div class="box-footer text-center visible-xs-block">
 						<?php if ($this->ion_auth->in_group('toko')): ?>
 							<?php if ($status_id==1): ?>
 								<button type="button" class="btn btn-success btn-lg" value="Berangkat ke lokasi" onclick="modal_ubah_status(this.value)">Berangkat ke lokasi</button>
