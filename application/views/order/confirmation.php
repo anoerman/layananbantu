@@ -220,6 +220,7 @@
 														<div class="form-group">
 															<div class="col-md-12 text-center">
 																<h4>Metode Pembayaran : Reguler.</h4>
+																<input type="hidden" name="nominal_go_pay" id="nominal_go_pay" class="form-control kurangi-total" value="0" min="0" onkeypress="return input_angka(event)">
 																<p>Silahkan tagihkan ke konsumen jumlah total tagihan sebagai berikut.</p>
 															</div>
 														</div>
