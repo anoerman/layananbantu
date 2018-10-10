@@ -8,7 +8,6 @@
 	<title><?php echo $this->config->item('site_name'); ?></title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.ico'); ?>">
 	<!-- Bootstrap 3.3.6 -->
 	<link rel="stylesheet" href="<?php echo base_url('assets/templates/adminlte-2-3-11/bootstrap/css/bootstrap.min.css'); ?>">
 	<!-- Font Awesome -->
@@ -20,6 +19,13 @@
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
 			 folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="<?php echo base_url('assets/templates/adminlte-2-3-11/dist/css/skins/_all-skins.min.css'); ?>">
+
+	<!-- Icons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url('assets/images/'); ?>apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url('assets/images/'); ?>favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets/images/'); ?>favicon-16x16.png">
+	<link rel="manifest" href="<?php echo base_url('assets/images/'); ?>site.webmanifest">
+	<link rel="mask-icon" href="<?php echo base_url('assets/images/'); ?>safari-pinned-tab.svg" color="#5bbad5">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
