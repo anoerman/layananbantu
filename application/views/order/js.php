@@ -45,6 +45,19 @@
 	</script>
 <!-- / Daterangepicker -->
 
+<!-- Datetimepicker -->
+<link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'); ?>">
+<script type="text/javascript" src="<?php echo base_url('assets/plugins/moment-2.22.2/moment.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/plugins/moment-2.22.2/locale/id.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/plugins/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') ?>"></script>
+<!-- <script type="text/javascript" src="<?php echo base_url('assets/plugins/bootstrap-datetimepicker/build/js/id.js') ?>"></script> -->
+<script type="text/javascript">
+  $(function () {
+    $('.datetimepicker').datetimepicker();
+  });
+</script>
+<!-- / Datetimepicker -->
+
 <script type="text/javascript">
 
 	// Fungsi untuk input hanya angka

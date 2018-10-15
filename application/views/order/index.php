@@ -38,8 +38,9 @@
 								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 									<div class="form-group">
 										<label for="nama_konsumen" class="control-label col-sm-3">Tanggal</label>
-										<div class="col-sm-9 col-md-7">
-											<p class="form-control-static"><?php echo date(DATE_RFC1123, now()); ?></p>
+										<div class="col-sm-9 col-md-5">
+											<input type="text" name="tanggal" id="tanggal" class="form-control datetimepicker" value="<?php if (!set_value('tanggal')){echo date('d-m-Y H.i', now());} else {echo set_value('tanggal');} ?>">
+											<!-- <p class="form-control-static"><?php echo date(DATE_RFC1123, now()); ?></p> -->
 										</div>
 									</div>
 									<div class="form-group">

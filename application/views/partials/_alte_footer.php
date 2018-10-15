@@ -75,3 +75,4 @@
 
 </body>
 </html>
+<?php //echo $last_query ?>

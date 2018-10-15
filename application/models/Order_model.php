@@ -300,7 +300,8 @@ class Order_model extends CI_Model
 		$this->db->where('toko', $toko);
 		$this->db->join($this->user_table, $this->main_table.".toko = ".$this->user_table.".username", "left");
 		$this->db->join($this->status_table, $this->main_table.".status = ".$this->status_table.".id", "left");
-		$this->db->order_by($this->main_table.".id", "desc");
+		// $this->db->order_by($this->main_table.".id", "desc");
+		$this->db->order_by($this->main_table.".tanggal", "desc");
 		$datas = $this->db->get($this->main_table);
 		return $datas;
 	}

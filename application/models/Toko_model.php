@@ -105,8 +105,8 @@ class Toko_model extends CI_Model
 			$this->main_table.".username = ".$this->order_table.".toko AND ".$this->order_table.".status < '6'", 'left');
 		$this->db->where($this->main_table.'.regional_id', $regional);
 		$this->db->where($this->group_table.'.group_id', '3');
-		$where = "( ".$this->order_table.".status='6' OR ".$this->order_table.".status IS NULL )";
-		$this->db->where($where);
+		// $where = "( ".$this->order_table.".status='6' OR ".$this->order_table.".status IS NULL )";
+		// $this->db->where($where);
 		$datas = $this->db->get($this->main_table);
 		return $datas;
 	}

@@ -109,7 +109,8 @@ class Order extends CI_Controller {
 					// Order data array
 					$data = array(
 						'kode'          => $kode,
-						'tanggal'       => date('Y-m-d H:i:s', now()),
+						'tanggal'       => date('Y-m-d H:i:s', strtotime($this->input->post('tanggal'))),
+						// 'tanggal'       => date('Y-m-d H:i:s', now()),
 						'nama_konsumen' => $this->input->post('nama_konsumen'),
 						'hp_konsumen'   => str_replace($rpl, "", $this->input->post('hp_konsumen')),
 						'alamat_lokasi' => $this->input->post('alamat_lokasi'),
@@ -401,6 +402,7 @@ class Order extends CI_Controller {
 			$order_aktif_toko = $this->order_model->get_order_toko_aktif($toko);
 			// Jika ada, tampilkan detail ordernya.
 			if (count($order_aktif_toko->result())>0) {
+				$this->data['last_query'] = $this->db->last_query();
 				// Ambil kode order aktif
 				$kode = "";
 				foreach ($order_aktif_toko->result() as $data) {
@@ -872,7 +874,7 @@ class Order extends CI_Controller {
 
 						// Update bayar data
 						$this->order_model->update_data_bayar($data_bayar, $lb_id);
-						
+
 						// Hapus semua data yang tidak di aktualkan
 						$data_hapus['hapus']      = '1';
 						$data_hapus['keterangan'] = 'Data dihapus karena tidak sesuai dengan request awal';
