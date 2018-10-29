@@ -177,7 +177,11 @@ class Order_model extends CI_Model
 			$this->status_table.".nama AS nama_status, ".
 			$this->cabang_table.".nama AS nama_cabang, ".
 			$this->regional_table.".nama AS nama_regional, ".
-			$this->jenis_velg_table.".nama AS nama_jenis_velg "
+			$this->jenis_velg_table.".nama AS nama_jenis_velg, ".
+			$this->metode_pesan_table.".nama AS nama_metode_pesan, ".
+			$this->main_bayar_table.".metode_bayar, ".
+			$this->main_bayar_table.".go_pay_bayar, ".
+			$this->main_bayar_table.".total_bayar "
 		);
 		$this->db->join($this->user_table, $this->main_table.".toko = ".$this->user_table.".username", "left");
 		$this->db->join($this->user_table ." AS user2", $this->main_table.".created_by = user2.username", "left");
@@ -185,6 +189,8 @@ class Order_model extends CI_Model
 		$this->db->join($this->cabang_table, $this->main_table.".cabang = ".$this->cabang_table.".id", "left");
 		$this->db->join($this->regional_table, $this->main_table.".regional = ".$this->regional_table.".id", "left");
 		$this->db->join($this->jenis_velg_table, $this->main_table.".jenis_velg = ".$this->jenis_velg_table.".id", "left");
+		$this->db->join($this->metode_pesan_table, $this->main_table.".metode_pesan = ".$this->metode_pesan_table.".id", "left");
+		$this->db->join($this->main_bayar_table, $this->main_table.".id = ".$this->main_bayar_table.".lb_id", "left");
 		$this->db->where('hapus', 0);
 		$this->db->where('tanggal >=', $awal);
 		$this->db->where('tanggal <=', $akhir);

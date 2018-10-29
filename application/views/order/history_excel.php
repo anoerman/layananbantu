@@ -46,14 +46,17 @@ $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(20);
 $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(15);
 $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(20);
 $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(20);
-$objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(40);
-$objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(20);
-$objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(20);
-$objPHPExcel->getActiveSheet()->getColumnDimension('Q')->setWidth(30);
+$objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
+$objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(30);
+$objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(15);
+$objPHPExcel->getActiveSheet()->getColumnDimension('Q')->setWidth(20);
 $objPHPExcel->getActiveSheet()->getColumnDimension('R')->setWidth(30);
-$objPHPExcel->getActiveSheet()->getColumnDimension('S')->setWidth(30);
-$objPHPExcel->getActiveSheet()->getColumnDimension('T')->setWidth(20);
-$objPHPExcel->getActiveSheet()->getColumnDimension('U')->setWidth(20);
+$objPHPExcel->getActiveSheet()->getColumnDimension('S')->setWidth(20);
+$objPHPExcel->getActiveSheet()->getColumnDimension('T')->setWidth(30);
+$objPHPExcel->getActiveSheet()->getColumnDimension('U')->setWidth(30);
+$objPHPExcel->getActiveSheet()->getColumnDimension('V')->setWidth(30);
+$objPHPExcel->getActiveSheet()->getColumnDimension('W')->setWidth(20);
+$objPHPExcel->getActiveSheet()->getColumnDimension('X')->setWidth(20);
 
 // Value
 $objPHPExcel->setActiveSheetIndex(0)
@@ -69,18 +72,21 @@ $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('K4', 'Nomor Polisi')
             ->setCellValue('L4', 'Jenis Velg')
             ->setCellValue('M4', 'Sumber Info')
-            ->setCellValue('N4', 'Produk')
-            ->setCellValue('O4', 'Harga')
-            ->setCellValue('P4', 'Petugas LB')
-            ->setCellValue('Q4', 'Keterangan')
-            ->setCellValue('R4', 'Info Ubah Data')
-            ->setCellValue('S4', 'Info Pembatalan')
-            ->setCellValue('T4', 'Lead Time 1 (Menit)')
-            ->setCellValue('U4', 'Lead Time 2 (Menit)')
+            ->setCellValue('N4', 'Metode Pesan')
+            ->setCellValue('O4', 'Produk')
+            ->setCellValue('P4', 'Harga')
+            ->setCellValue('Q4', 'Metode Bayar')
+            ->setCellValue('R4', 'Pembayaran')
+            ->setCellValue('S4', 'Petugas LB')
+            ->setCellValue('T4', 'Keterangan')
+            ->setCellValue('U4', 'Info Ubah Data')
+            ->setCellValue('V4', 'Info Pembatalan')
+            ->setCellValue('W4', 'Lead Time 1 (Menit)')
+            ->setCellValue('X4', 'Lead Time 2 (Menit)')
             ;
 
 // Header style
-$objPHPExcel->getActiveSheet()->getStyle('B4:U4')->applyFromArray(
+$objPHPExcel->getActiveSheet()->getStyle('B4:X4')->applyFromArray(
 	array(
 		'fill' => array(
 			'type'  => PHPExcel_Style_Fill::FILL_SOLID,
@@ -103,7 +109,7 @@ $objPHPExcel->getActiveSheet()->getStyle('B4:U4')->applyFromArray(
 $top_limit = 4;
 
 // Isi
-$no          = 0;
+$no = 0;
 
 // Zebra
 $zebra = "ya";
@@ -131,8 +137,12 @@ foreach ($data_order_selesai->result_array() as $dl) {
 		->setCellValue("K".$top_limit, $dl['nomor_polisi'])
 		->setCellValue("L".$top_limit, $dl['nama_jenis_velg'])
 		->setCellValue("M".$top_limit, $dl['sumber_info'])
-		->setCellValue("P".$top_limit, $dl['petugas'])
-		->setCellValue("Q".$top_limit, $dl['keterangan'])
+		->setCellValue("N".$top_limit, $dl['nama_metode_pesan'])
+		->setCellValue("Q".$top_limit, ($dl['metode_bayar'] == 1) ? "Go Pay" : "Reguler" )
+		->setCellValue("R".$top_limit, ($dl['metode_bayar'] == 1) ? "Bayar Tunai : ".$dl['total_bayar']." "
+		."Go Pay : ".$dl['go_pay_bayar'] : "Bayar Tunai : ".$dl['total_bayar'] )
+		->setCellValue("S".$top_limit, $dl['petugas'])
+		->setCellValue("T".$top_limit, $dl['keterangan'])
   ;
 
 	// ===========================================================================
@@ -143,7 +153,7 @@ foreach ($data_order_selesai->result_array() as $dl) {
 	foreach ($data_ubah->result() as $dubah) {
 		$ket_ubah = $dubah->keterangan . "\r";
 		$objPHPExcel->setActiveSheetIndex(0)
-			->setCellValue("R".$top_limit, $ket_ubah)
+			->setCellValue("U".$top_limit, $ket_ubah)
 	  ;
 	}
 
@@ -155,7 +165,7 @@ foreach ($data_order_selesai->result_array() as $dl) {
 	foreach ($data_batal->result() as $dbatal) {
 		$ket_batal = $dbatal->keterangan . "\r";
 		$objPHPExcel->setActiveSheetIndex(0)
-			->setCellValue("S".$top_limit, $ket_batal)
+			->setCellValue("V".$top_limit, $ket_batal)
 		;
 	}
 
@@ -200,8 +210,8 @@ foreach ($data_order_selesai->result_array() as $dl) {
 
 	// Set lead time
 	$objPHPExcel->setActiveSheetIndex(0)
-	->setCellValue("T".$top_limit, $lt1)
-	->setCellValue("U".$top_limit, $lt2)
+	->setCellValue("W".$top_limit, $lt1)
+	->setCellValue("X".$top_limit, $lt2)
 	;
 
 	// ===========================================================================
@@ -210,8 +220,8 @@ foreach ($data_order_selesai->result_array() as $dl) {
 	$data_detail = $order_model->get_order_detail_aktual_by_kode($dl['kode']);
 	foreach ($data_detail->result() as $ddetail) {
 		$objPHPExcel->setActiveSheetIndex(0)
-			->setCellValue("N".$top_limit, $ddetail->produk)
-			->setCellValue("O".$top_limit, $ddetail->harga)
+			->setCellValue("O".$top_limit, $ddetail->produk)
+			->setCellValue("P".$top_limit, $ddetail->harga)
 	  ;
 		$top_limit++;
 		$top_limit2 = $top_limit;
@@ -220,7 +230,7 @@ foreach ($data_order_selesai->result_array() as $dl) {
 	// ===========================================================================
 
 	// Content style
-	$objPHPExcel->getActiveSheet()->getStyle('B'.$top_limit1.':U'.$top_limit2)->applyFromArray(
+	$objPHPExcel->getActiveSheet()->getStyle('B'.$top_limit1.':X'.$top_limit2)->applyFromArray(
 		array(
 			'borders' => array(
 				'top'    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
@@ -234,7 +244,7 @@ foreach ($data_order_selesai->result_array() as $dl) {
 	// Set zebra color (odds number)
 	if ($zebra=="ya") {
 		if ($no%2==1) {
-			$objPHPExcel->getActiveSheet()->getStyle('B'.$top_limit1.':U'.$top_limit2)->applyFromArray(
+			$objPHPExcel->getActiveSheet()->getStyle('B'.$top_limit1.':X'.$top_limit2)->applyFromArray(
 				array(
 					'fill' => array(
 					'type'  => PHPExcel_Style_Fill::FILL_SOLID,
@@ -269,18 +279,21 @@ $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('K'.$top_limit, 'Nomor Polisi')
             ->setCellValue('L'.$top_limit, 'Jenis Velg')
             ->setCellValue('M'.$top_limit, 'Sumber Info')
-            ->setCellValue('N'.$top_limit, 'Produk')
-            ->setCellValue('O'.$top_limit, 'Harga')
-            ->setCellValue('P'.$top_limit, 'Petugas LB')
-            ->setCellValue('Q'.$top_limit, 'Keterangan')
-            ->setCellValue('R'.$top_limit, 'Info Ubah Data')
-            ->setCellValue('S'.$top_limit, 'Info Pembatalan')
-            ->setCellValue('T'.$top_limit, 'Lead Time 1 (Menit)')
-            ->setCellValue('U'.$top_limit, 'Lead Time 2 (Menit)')
+            ->setCellValue('N'.$top_limit, 'Metode Pesan')
+            ->setCellValue('O'.$top_limit, 'Produk')
+            ->setCellValue('P'.$top_limit, 'Harga')
+            ->setCellValue('Q'.$top_limit, 'Metode Bayar')
+            ->setCellValue('R'.$top_limit, 'Pembayaran')
+            ->setCellValue('S'.$top_limit, 'Petugas LB')
+            ->setCellValue('T'.$top_limit, 'Keterangan')
+            ->setCellValue('U'.$top_limit, 'Info Ubah Data')
+            ->setCellValue('V'.$top_limit, 'Info Pembatalan')
+            ->setCellValue('W'.$top_limit, 'Lead Time 1 (Menit)')
+            ->setCellValue('X'.$top_limit, 'Lead Time 2 (Menit)')
             ;
 
 // Header style
-$objPHPExcel->getActiveSheet()->getStyle('B'.($top_limit).':U'.($top_limit))->applyFromArray(
+$objPHPExcel->getActiveSheet()->getStyle('B'.($top_limit).':X'.($top_limit))->applyFromArray(
 	array(
 		'fill' => array(
 			'type'  => PHPExcel_Style_Fill::FILL_SOLID,
@@ -328,8 +341,12 @@ foreach ($data_order_batal->result_array() as $dlbtl) {
 		->setCellValue("K".$top_limit, $dlbtl['nomor_polisi'])
 		->setCellValue("L".$top_limit, $dlbtl['nama_jenis_velg'])
 		->setCellValue("M".$top_limit, $dlbtl['sumber_info'])
-		->setCellValue("P".$top_limit, $dlbtl['petugas'])
-		->setCellValue("Q".$top_limit, $dlbtl['keterangan'])
+		->setCellValue("N".$top_limit, $dlbtl['nama_metode_pesan'])
+		->setCellValue("Q".$top_limit, ($dlbtl['metode_bayar'] == 1) ? "Go Pay" : "Reguler" )
+		->setCellValue("R".$top_limit, ($dlbtl['metode_bayar'] == 1) ? "Bayar Tunai : ".$dlbtl['total_bayar']." "
+		."Go Pay : ".$dlbtl['go_pay_bayar'] : "Bayar Tunai : ".$dlbtl['total_bayar'] )
+		->setCellValue("S".$top_limit, $dlbtl['petugas'])
+		->setCellValue("T".$top_limit, $dlbtl['keterangan'])
   ;
 
 	// ===========================================================================
@@ -340,7 +357,7 @@ foreach ($data_order_batal->result_array() as $dlbtl) {
 	foreach ($data_ubah->result() as $dubah) {
 		$ket_ubah = $dubah->keterangan . "\r";
 		$objPHPExcel->setActiveSheetIndex(0)
-			->setCellValue("R".$top_limit, $ket_ubah)
+			->setCellValue("U".$top_limit, $ket_ubah)
 	  ;
 	}
 
@@ -352,7 +369,7 @@ foreach ($data_order_batal->result_array() as $dlbtl) {
 	foreach ($data_batal->result() as $dbatal) {
 		$ket_batal = $dbatal->keterangan . "\r";
 		$objPHPExcel->setActiveSheetIndex(0)
-			->setCellValue("S".$top_limit, $ket_batal)
+			->setCellValue("V".$top_limit, $ket_batal)
 		;
 	}
 
@@ -397,8 +414,8 @@ foreach ($data_order_batal->result_array() as $dlbtl) {
 
 	// Set lead time
 	$objPHPExcel->setActiveSheetIndex(0)
-	->setCellValue("T".$top_limit, $lt1)
-	->setCellValue("U".$top_limit, $lt2)
+	->setCellValue("W".$top_limit, $lt1)
+	->setCellValue("X".$top_limit, $lt2)
 	;
 
 	// ===========================================================================
@@ -407,8 +424,8 @@ foreach ($data_order_batal->result_array() as $dlbtl) {
 	$data_detail = $order_model->get_order_detail_aktual_by_kode($dlbtl['kode']);
 	foreach ($data_detail->result() as $ddetail) {
 		$objPHPExcel->setActiveSheetIndex(0)
-			->setCellValue("N".$top_limit, $ddetail->produk)
-			->setCellValue("O".$top_limit, $ddetail->harga)
+			->setCellValue("O".$top_limit, $ddetail->produk)
+			->setCellValue("P".$top_limit, $ddetail->harga)
 	  ;
 		$top_limit++;
 		$top_limit2 = $top_limit;
@@ -417,7 +434,7 @@ foreach ($data_order_batal->result_array() as $dlbtl) {
 	// ===========================================================================
 
 	// Content style
-	$objPHPExcel->getActiveSheet()->getStyle('B'.$top_limit1.':U'.$top_limit2)->applyFromArray(
+	$objPHPExcel->getActiveSheet()->getStyle('B'.$top_limit1.':X'.$top_limit2)->applyFromArray(
 		array(
 			'borders' => array(
 				'top'    => array('style' => PHPExcel_Style_Border::BORDER_THIN),
@@ -431,7 +448,7 @@ foreach ($data_order_batal->result_array() as $dlbtl) {
 	// Set zebra color (odds number)
 	if ($zebra=="ya") {
 		if ($no%2==1) {
-			$objPHPExcel->getActiveSheet()->getStyle('B'.$top_limit1.':U'.$top_limit2)->applyFromArray(
+			$objPHPExcel->getActiveSheet()->getStyle('B'.$top_limit1.':X'.$top_limit2)->applyFromArray(
 				array(
 					'fill' => array(
 					'type'  => PHPExcel_Style_Fill::FILL_SOLID,
@@ -446,10 +463,10 @@ foreach ($data_order_batal->result_array() as $dlbtl) {
 }
 
 // Wrap it
-$objPHPExcel->getActiveSheet()->getStyle('B4:U'.$top_limit)->getAlignment()->setWrapText(true);
+$objPHPExcel->getActiveSheet()->getStyle('B4:X'.$top_limit)->getAlignment()->setWrapText(true);
 $objPHPExcel->getActiveSheet()->getStyle('B'.$info_limit)->getAlignment()->setWrapText(false);
 // Set Vertical Align to TOP!
-$objPHPExcel->getActiveSheet()->getStyle('B3:U'.$top_limit)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+$objPHPExcel->getActiveSheet()->getStyle('B3:X'.$top_limit)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
 
 $objPHPExcel->getActiveSheet()->setCellValue("B2", "Riwayat layanan bantu cabang : ".$nama_cabang);
 

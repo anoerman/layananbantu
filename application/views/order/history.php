@@ -221,7 +221,7 @@
 														</div>
 
 														<div class="col-md-12 col-sm-12">
-															<span class="glyphicon glyphicon-heart"></span> &nbsp; Status : <?php echo $data_1->nama_status; ?>
+															<span class="glyphicon glyphicon-comment"></span> &nbsp; Metode Pesan : <?php echo $data_1->nama_metode_pesan; ?>
 														</div>
 													</div>
 												</div>
